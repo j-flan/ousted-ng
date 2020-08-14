@@ -180,9 +180,6 @@ export class StatsComponent implements OnInit {
       points: 0,
       hp: 100,
       maxHp: 100,
-      dex: this.playerItem.mainWeapon.dex,
-      evade: this.playerItem.armor.evade,
-      armor: this.playerItem.armor.armor
     }
 
   };
