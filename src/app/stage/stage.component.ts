@@ -12,9 +12,13 @@ export class StageComponent implements OnInit {
     protected central: CentralService,
   ) { }
 
-  location: string;
+  location: any = this.central.getLocation();
 
   ngOnInit(){
+  }
+  changeLocationRandom(){
+    let rand = Math.floor(Math.random() * this.central.areasArray.length -1); 
+    this.central.setRandomLocation(rand)
     this.location = this.central.getLocation();
   }
 }
