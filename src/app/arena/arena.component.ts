@@ -13,13 +13,7 @@ export class ArenaComponent implements OnInit {
     protected central: CentralService
   ) { }
 
-  enemy: any;
-  stats: any;
-  dex: any;
-  evade: any;
-  defence: any;
-  min: any;
-  max: any;
+  enemyHp: any;
   thisEnemy: any;
   playerWeapon = new Subject<any>();
   playerArmor = new Subject<any>();
@@ -32,19 +26,30 @@ export class ArenaComponent implements OnInit {
     armor: {},
     //accessory: {},
   };
-  playerStat: any ={};
+  player: any ={};
 
   ngOnInit(): void {
+    this.player ={
+      minDmg: 0,
+      maxDmg: 0,
+      dex: 0,
+      evade: 0,
+      defence: 0,
+      gold: 0,
+      points: 0,
+      hp: 100,
+      maxHp: 100,
+    }
     this.playerWeapon.subscribe({
       next: weapon=>{
         this.playerItem.mainWeapon = weapon;
-        this.max = weapon.max
-        this.min = weapon.min
-        this.dex = weapon.dex
+        this.player.maxDmg = weapon.maxDmg
+        this.player.minDmg = weapon.minDmg
+        this.player.dex = weapon.dex
         this.playerItem.secondary.dex ? 
-          this.dex += this.playerItem.secondary.dex : this.dex += 0
+          this.player.dex += this.playerItem.secondary.dex : this.player.dex += 0
         console.log('Equipped weapon: ', this.playerItem.mainWeapon)
-        console.log('dex: ', this.dex)
+        console.log('dex: ', this.player.dex)
       }
     });
     this.playerWeapon.next(this.central.mainWeapon.basicSword);
@@ -52,26 +57,19 @@ export class ArenaComponent implements OnInit {
     this.playerSecondary.subscribe({
       next: item=>{
         this.playerItem.secondary = item;
-        this.min = this.playerItem.mainWeapon.min + item.min
-        this.dex = this.playerItem.mainWeapon.dex + item.dex
+        this.player.minDmg = this.playerItem.mainWeapon.minDmg + item.minDmg
+        this.player.dex = this.playerItem.mainWeapon.dex + item.dex
       }
     });
 
     this.playerArmor.subscribe({
       next: item=>{
         this.playerItem.armor = item;
-        this.evade = item.evade
-        this.defence = item.defence
+        this.player.evade = item.evade
+        this.player.defence = item.defence
       }
     });
     this.playerArmor.next(this.central.armor.clothes)
-
-    this.playerStat ={
-      gold: 0,
-      points: 0,
-      hp: 100,
-      maxHp: 100,
-    }
   }
 
   setWeapon(weapon){
@@ -87,24 +85,29 @@ export class ArenaComponent implements OnInit {
   getEnemy(){ 
     let location = this.central.getLocation()
     let rand = Math.floor(Math.random() * 4);
-    let enemy = location.enemies[rand];
-    this.thisEnemy = enemy          
+    this.thisEnemy = location.enemies[rand];
+    this.setNewEnemyHp(this.thisEnemy.hp)          
   }
-
+ setNewEnemyHp(hp){
+   this.enemyHp = hp
+ }
+ enemyKilled(){
+   this.player.gold += this.thisEnemy.gold
+ }
   attack(){   
-    console.log('maxDMG: ', this.max, 'minDmg', this.min  )
-    let attackRange = (this.max - this.min);      
+    console.log('maxDMG: ', this.player.maxDmg, 'minDmg', this.player.minDmg  )
+    let attackRange = (this.player.maxDmg - this.player.minDmg);      
     //hit or miss
     //let out = document.getElementById("text");
     let hitChance = Math.floor(Math.random() * (this.thisEnemy.toHit) + 1);
     console.log('Hit chance: ', hitChance)
     //hit for random damage between min & max
-    if (this.dex >= hitChance){
+    if (this.player.dex >= hitChance){
         //this.hitAnimation();
         
-        let dmg = Math.floor(Math.random() * (attackRange)+ this.min);
-        console.log(this.thisEnemy, ' Hit for ', dmg, 'physical dmg')
-        this.thisEnemy.hp -= dmg;
+        let dmg = Math.floor(Math.random() * (attackRange)+ this.player.minDmg);
+        console.log(this.thisEnemy.name, ' Hit for ', dmg, 'physical dmg')
+        this.enemyHp -= dmg;
        // out.textContent = `You hit the ${this.thisEnemy.name} for ${dmg} dmg`;
         // if(this.player.vamp)
         //     this.pVamp();
@@ -113,7 +116,8 @@ export class ArenaComponent implements OnInit {
         // else if(this.player.poison)
         //     this.pPoison();
         //thisEnemy killed
-        if (this.thisEnemy.hp <= 0){
+        if (this.enemyHp <= 0){
+          console.log('Death!')
             //this.thisEnemyKilled();
             
         } 
@@ -132,14 +136,14 @@ thisEnemyAttack(){
 
   //hit for random damage between min & max
 
-  if (hit >= this.evade){
+  if (hit >= this.player.evade){
     //   if(this.heroImage != 'gifs/heroAttack.gif'){
     //       this.heroHit();
     //       setTimeout(()=>{this.heroHit(); this.setHeroImage(`gifs/hero1.gif`)},750);
     //   }          
       let range = this.thisEnemy.maxDmg - this.thisEnemy.minDmg;
       let dmg = Math.floor((Math.random() * range) + this.thisEnemy.minDmg);
-      this.stats.hp -= dmg;
+      this.player.hp -= dmg;
       //eOut.textContent = `${this.thisEnemy.name} ${this.thisEnemy.attack} for ${dmg} dmg`;
     //   if(this.thisEnemy.vamp)
     //       this.eVamp();
@@ -147,7 +151,7 @@ thisEnemyAttack(){
     //       this.eStun();
     //   else if(this.thisEnemy.poison)
     //       this.ePoison();
-      if(this.playerStat.hp < 1){}
+      if(this.player.hp < 1){}
           //this.playerKilled();     
   }
   //miss
