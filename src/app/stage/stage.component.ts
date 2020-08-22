@@ -9,7 +9,7 @@ import { CentralService } from '../central.service'
 export class StageComponent implements OnInit {
 
   constructor(
-    protected central: CentralService
+    protected central: CentralService,
   ) { }
 
   location: string;
@@ -17,5 +17,4 @@ export class StageComponent implements OnInit {
   ngOnInit(){
     this.location = this.central.getLocation();
   }
-
 }

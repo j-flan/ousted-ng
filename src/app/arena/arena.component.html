@@ -1,0 +1,12 @@
+<button mat-raised-button (click)="getNewEnemy()">Find New Opponent</button>
+<button mat-raised-button (click)="attack()">Attack</button><br>
+Player
+<p>Weapon: {{playerItem?.mainWeapon.name}}</p>
+<p>Attack: {{playerItem?.mainWeapon.min}} - {{playerItem?.mainWeapon.max}}</p>
+<p>HP: {{playerStat?.hp}}/{{playerStat?.maxHp}}</p>
+<p></p>
+<div *ngIf="thisEnemy?.hp">
+    Opponent
+    <p>Name: {{this.thisEnemy?.name}}</p>
+    <p>HP: {{thisEnemy?.hp}}</p>
+</div>
