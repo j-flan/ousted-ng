@@ -19,6 +19,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatRadioModule
   ],
   providers: [CentralService],
   bootstrap: [AppComponent]

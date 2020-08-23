@@ -1,1 +1,33 @@
-<p>menu-dialog works!</p>
+<h4>Main-Hand Weapons</h4>
+<mat-selection-list [multiple]="false">
+    <mat-list-option
+        *ngFor="let item of weaponGroup"
+        [value]="item"
+        (click)="equipWeapon(item)"
+    >
+        {{item.name}}
+    </mat-list-option>
+</mat-selection-list>
+<hr>
+<h4>Off-Hand Items</h4>
+<mat-selection-list [multiple]="false">
+    <mat-list-option
+        *ngFor="let item of secondaryGroup"
+        [value]="item"
+        (click)="equipSecondary(item)"
+    >
+        {{item.name}}
+    </mat-list-option>
+</mat-selection-list>
+<hr>
+<h4>Armor</h4>
+<mat-selection-list [multiple]="false">
+    <mat-list-option
+        *ngFor="let item of armorGroup"
+        [value]="item"
+        (click)="equipArmor(item)"
+    >
+        {{item.name}}
+    </mat-list-option>
+</mat-selection-list>
+<button mat-raised-button [mat-dialog-close]="equip">Save</button>

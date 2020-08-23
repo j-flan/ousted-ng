@@ -30,7 +30,7 @@ export class MerchantDialog implements OnInit {
   mainWeapons: any;
   secondary: any;
   armor: any;
-  panelOpenState: boolean
+  panelOpenState: boolean = false
 
   ngOnInit(){
     this.panelOpenState = false
@@ -47,9 +47,12 @@ export class MerchantDialog implements OnInit {
     console.log('Inventory: ', this.inventory)
   }
   cashOut(){
-    this.bounty = {
-      gold: this.playerGold,
-      loot: this.inventory
+    if (this.inventory.length > 0){
+      this.bounty = {
+        gold: this.playerGold,
+        loot: this.inventory
+      }
+      console.log('cashing out: ', this.bounty)
     }
   }
 }

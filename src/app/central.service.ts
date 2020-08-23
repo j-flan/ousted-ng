@@ -1091,6 +1091,7 @@ export class CentralService {
 
   mainWeapon: any = {
     basicSword: {
+      type: 'main',
       name: 'knife',
       minDmg: 2,
       maxDmg: 5,
@@ -1099,6 +1100,7 @@ export class CentralService {
       special: '',
     },
     shortSword: {
+      type: 'main',
       name: 'Shortsword',
       minDmg: 3,
       maxDmg: 6,
@@ -1107,6 +1109,7 @@ export class CentralService {
       special: '',
     },
     longSword: {
+      type: 'main',
       name: 'Longsword',
       minDmg: 4,
       maxDmg: 9,
@@ -1115,6 +1118,7 @@ export class CentralService {
       special: '',
     },
     phantomBane: {
+      type: 'main',
       name: 'Phantombane',
       minDmg: 5,
       maxDmg: 8,
@@ -1123,6 +1127,7 @@ export class CentralService {
       special: '',
     },
     bastardSword: {
+      type: 'main',
       name: 'Frozen Bastard Sword',
       minDmg: 6,
       maxDmg: 12,
@@ -1131,6 +1136,7 @@ export class CentralService {
       special: 'stun',
     },
     voidRapier: {
+      type: 'main',
       name: 'Void Rapier',
       minDmg: 5,
       maxDmg: 11,
@@ -1139,6 +1145,7 @@ export class CentralService {
       special: 'vamp',
     },
     coralKukri: {
+      type: 'main',
       name: 'Coral Kukri',
       minDmg: 6,
       maxDmg: 11,
@@ -1147,6 +1154,7 @@ export class CentralService {
       special: 'poison',
     },
     soultrapKatana: {
+      type: 'main',
       name: 'Soultrap Katana',
       minDmg: 7,
       maxDmg: 13,
@@ -1155,6 +1163,7 @@ export class CentralService {
       special: 'vamp',
     },
     lightningAxe: {
+      type: 'main',
       name: 'Lightning Axe',
       minDmg: 8,
       maxDmg: 13,
@@ -1165,18 +1174,21 @@ export class CentralService {
   };
   armor: any = {
     clothes: {
+      type: 'armor',
       name: 'Soiled Clothes',
       defense: 0,
       evade: 7,
       cost: 0,
     },
     leatherArmor: {
+      type: 'armor',
       name: 'Leather Armor',
       defense: 1,
       evade: 6,
       cost: 15,
     },
     studdedLeatherArmor: {
+      type: 'armor',
       name: 'Studded Leather Armor',
       defense: 2,
       evade: 6,
@@ -1191,6 +1203,7 @@ export class CentralService {
   // }
   secondary: any = {
     parryingDagger: {
+      type: 'secondary',
       name: 'Parrying Dagger',
       dex: 2,
       minDmg: 1,
@@ -1198,6 +1211,7 @@ export class CentralService {
       cost: 150,
     },
     magicDagger: {
+      type: 'secondary',
       name: 'Magic Dagger',
       dex: 1,
       minDmg: 1,
@@ -1205,6 +1219,7 @@ export class CentralService {
       cost: 30,
     },
     magicShield: {
+      type: 'secondary',
       name: 'Magic Shield',
       dex: 0,
       minDmg: 0,

@@ -68,5 +68,6 @@
     </mat-expansion-panel>
 </mat-accordion>
 <br>
-<button mat-raised-button mat-dialog-close="cashOut()">Cash Out</button>
+<button mat-raised-button (click)="cashOut()">Put in stash</button>
+<button mat-raised-button [mat-dialog-close]="bounty">Cash out</button>
 

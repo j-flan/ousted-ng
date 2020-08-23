@@ -4,6 +4,7 @@ import {CentralService} from '../central.service'
 import {MatDialog} from '@angular/material/dialog'
 import {MerchantDialog} from '../merchant-dialog/merchant-dialog.component'
 import {MenuDialog} from '../menu-dialog/menu-dialog.component'
+import * as _ from 'lodash'
 
 @Component({
   selector: 'app-arena',
@@ -17,7 +18,7 @@ export class ArenaComponent implements OnInit {
     protected dialog: MatDialog
     ) {}
 
-  inventory: any;
+  inventory: any = [];
   wait: boolean = false;
   enemyHp: any;
   thisEnemy: any;
@@ -41,7 +42,7 @@ export class ArenaComponent implements OnInit {
       dex: 0,
       evade: 0,
       defense: 0,
-      gold: 0,
+      gold: 1000,
       points: 0,
       hp: 100,
       maxHp: 100,
@@ -52,7 +53,7 @@ export class ArenaComponent implements OnInit {
         this.player.maxDmg = weapon.maxDmg
         this.player.minDmg = weapon.minDmg
         this.player.dex = weapon.dex
-        this.playerItem.secondary.dex ? 
+        this.playerItem.secondary.dex ?
           this.player.dex += this.playerItem.secondary.dex : this.player.dex += 0
         console.log('Equipped weapon: ', this.playerItem.mainWeapon)
         console.log('dex: ', this.player.dex)
@@ -88,12 +89,12 @@ export class ArenaComponent implements OnInit {
     this.playerSecondary.next(secondary);
   }
 
-  getEnemy(){ 
+  getEnemy(){
     let location = this.central.getLocation()
     let rand = Math.floor(Math.random() * 4);
     this.thisEnemy = location.enemies[rand];
     console.log('Enemy: ', this.thisEnemy)
-    this.setNewEnemyHp(this.thisEnemy.hp)          
+    this.setNewEnemyHp(this.thisEnemy.hp)
   }
   setNewEnemyHp(hp){
     this.enemyHp = hp
@@ -103,11 +104,11 @@ export class ArenaComponent implements OnInit {
     this.player.points += this.thisEnemy.points;
     this.wait=false;
   }
-  attack(){  
-    this.wait = true; 
+  attack(){
+    this.wait = true;
     console.log('maxDMG: ', this.player.maxDmg, 'minDmg', this.player.minDmg  )
     //hit or miss
-    //let out = document.getElementById("text");
+
     let hitChance = Math.floor(Math.random() * (this.thisEnemy.toHit) + 1);
     console.log('Hit chance: ', hitChance)
     //hit for random damage between min & max
@@ -128,12 +129,12 @@ export class ArenaComponent implements OnInit {
       if (this.enemyHp <= 0){
         console.log('Death!')
         this.enemyKilled();
-          
-      } 
+
+      }
     }
     //miss
     else{
-        console.log('Miss!')              
+        console.log('Miss!')
     }
     if (this.enemyHp > 0){
       setTimeout(()=>{
@@ -143,7 +144,6 @@ export class ArenaComponent implements OnInit {
   }
   enemyAttack(){
     //hit or miss
-    //let eOut = document.getElementById("attText");
     let hitRange = (this.thisEnemy.maxHit - this.thisEnemy.minHit);
     let toHit = Math.floor(Math.random() * (hitRange) + this.thisEnemy.minHit);
 
@@ -153,13 +153,12 @@ export class ArenaComponent implements OnInit {
     //   if(this.heroImage != 'gifs/heroAttack.gif'){
     //       this.heroHit();
     //       setTimeout(()=>{this.heroHit(); this.setHeroImage(`gifs/hero1.gif`)},750);
-    //   }          
+    //   }
       let attackRange = (this.thisEnemy.maxDmg - this.thisEnemy.minDmg);
       let dmg = Math.floor(Math.random() * (attackRange) + this.thisEnemy.minDmg);
       console.log(`${this.thisEnemy.name} ${this.thisEnemy.attackStyle} for ${dmg} physical dmg`)
 
       this.player.hp -= dmg;
-      //eOut.textContent = `${this.thisEnemy.name} ${this.thisEnemy.attack} for ${dmg} dmg`;
     //   if(this.thisEnemy.vamp)
     //       this.eVamp();
     //   else if(this.thisEnemy.stun)
@@ -167,7 +166,7 @@ export class ArenaComponent implements OnInit {
     //   else if(this.thisEnemy.poison)
     //       this.ePoison();
       if(this.player.hp < 1){}
-          //this.playerKilled();     
+          //this.playerKilled();
     }
     //miss
     else{
@@ -180,6 +179,7 @@ export class ArenaComponent implements OnInit {
   merchantModal() {
     const dialogRef = this.dialog.open(MerchantDialog, {
       width: '700px',
+      maxHeight: '850px',
       data: {
         merchantStock: {
           mainWeapon: this.central.mainWeapon,
@@ -189,24 +189,35 @@ export class ArenaComponent implements OnInit {
         playerGold: this.player.gold
       }
     });
-    dialogRef.afterClosed().subscribe(purchases => {
-      // if (purchases) {
-      //   this.runTask(aoTask);
-      // }
+    dialogRef.afterClosed().subscribe(stash => {
+      if (stash) {
+        console.log('Have stash',  stash)
+        this.player.gold = stash.gold;
+        _.forEach(stash.loot, item=>{
+          this.inventory.push(item)
+        })
+        console.log('Updated inventory', this.inventory)
+      }
     });
   }
 
   menuModal() {
     const dialogRef = this.dialog.open(MenuDialog, {
       width: '700px',
+      maxHeight: '850px',
       data: {
-        
+        inventory: this.inventory
       }
     });
-    dialogRef.afterClosed().subscribe(purchases => {
-      // if (purchases) {
-      //   this.runTask(aoTask);
-      // }
+    dialogRef.afterClosed().subscribe(gear => {
+      if(gear){
+        if(gear.weapon)
+          this.playerWeapon.next(gear.weapon)
+        if(gear.secondary)
+          this.playerSecondary.next(gear.secondary)
+        if(gear.armor)
+          this.playerArmor.next(gear.armor)
+      }
     });
   }
 }
