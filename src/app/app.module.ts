@@ -9,20 +9,39 @@ import { StageComponent } from './stage/stage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button'
 import {CentralService} from './central.service';
-import { ArenaComponent } from './arena/arena.component'
+import { ArenaComponent } from './arena/arena.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MerchantDialog } from './merchant-dialog/merchant-dialog.component';
+import { MenuDialog } from './menu-dialog/menu-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     AppOutputComponent,
     StageComponent,
-    ArenaComponent
+    ArenaComponent,
+    MerchantDialog,
+    MenuDialog
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatListModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule
   ],
   providers: [CentralService],
   bootstrap: [AppComponent]

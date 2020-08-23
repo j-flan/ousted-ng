@@ -1166,19 +1166,19 @@ export class CentralService {
   armor: any = {
     clothes: {
       name: 'Soiled Clothes',
-      defence: 0,
+      defense: 0,
       evade: 7,
       cost: 0,
     },
     leatherArmor: {
       name: 'Leather Armor',
-      defence: 1,
+      defense: 1,
       evade: 6,
       cost: 15,
     },
     studdedLeatherArmor: {
       name: 'Studded Leather Armor',
-      defence: 2,
+      defense: 2,
       evade: 6,
       cost: 220,
     },

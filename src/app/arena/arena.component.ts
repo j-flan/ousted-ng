@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import {CentralService} from '../central.service'
+import {MatDialog} from '@angular/material/dialog'
+import {MerchantDialog} from '../merchant-dialog/merchant-dialog.component'
+import {MenuDialog} from '../menu-dialog/menu-dialog.component'
 
 @Component({
   selector: 'app-arena',
@@ -10,9 +13,12 @@ import {CentralService} from '../central.service'
 export class ArenaComponent implements OnInit {
 
   constructor(
-    protected central: CentralService
-  ) { }
+    protected central: CentralService,
+    protected dialog: MatDialog
+    ) {}
 
+  inventory: any;
+  wait: boolean = false;
   enemyHp: any;
   thisEnemy: any;
   playerWeapon = new Subject<any>();
@@ -34,7 +40,7 @@ export class ArenaComponent implements OnInit {
       maxDmg: 0,
       dex: 0,
       evade: 0,
-      defence: 0,
+      defense: 0,
       gold: 0,
       points: 0,
       hp: 100,
@@ -66,7 +72,7 @@ export class ArenaComponent implements OnInit {
       next: item=>{
         this.playerItem.armor = item;
         this.player.evade = item.evade
-        this.player.defence = item.defence
+        this.player.defense = item.defense
       }
     });
     this.playerArmor.next(this.central.armor.clothes)
@@ -86,63 +92,72 @@ export class ArenaComponent implements OnInit {
     let location = this.central.getLocation()
     let rand = Math.floor(Math.random() * 4);
     this.thisEnemy = location.enemies[rand];
+    console.log('Enemy: ', this.thisEnemy)
     this.setNewEnemyHp(this.thisEnemy.hp)          
   }
- setNewEnemyHp(hp){
-   this.enemyHp = hp
- }
- enemyKilled(){
-   this.player.gold += this.thisEnemy.gold
- }
-  attack(){   
+  setNewEnemyHp(hp){
+    this.enemyHp = hp
+  }
+  enemyKilled(){
+    this.player.gold += this.thisEnemy.gold;
+    this.player.points += this.thisEnemy.points;
+    this.wait=false;
+  }
+  attack(){  
+    this.wait = true; 
     console.log('maxDMG: ', this.player.maxDmg, 'minDmg', this.player.minDmg  )
-    let attackRange = (this.player.maxDmg - this.player.minDmg);      
     //hit or miss
     //let out = document.getElementById("text");
     let hitChance = Math.floor(Math.random() * (this.thisEnemy.toHit) + 1);
     console.log('Hit chance: ', hitChance)
     //hit for random damage between min & max
     if (this.player.dex >= hitChance){
-        //this.hitAnimation();
-        
-        let dmg = Math.floor(Math.random() * (attackRange)+ this.player.minDmg);
-        console.log(this.thisEnemy.name, ' Hit for ', dmg, 'physical dmg')
-        this.enemyHp -= dmg;
-       // out.textContent = `You hit the ${this.thisEnemy.name} for ${dmg} dmg`;
-        // if(this.player.vamp)
-        //     this.pVamp();
-        // else if(this.player.stun)
-        //     this.pStun();
-        // else if(this.player.poison)
-        //     this.pPoison();
-        //thisEnemy killed
-        if (this.enemyHp <= 0){
-          console.log('Death!')
-            //this.thisEnemyKilled();
-            
-        } 
+      //this.hitAnimation();
+      let attackRange = (this.player.maxDmg - this.player.minDmg);
+      let dmg = Math.floor(Math.random() * (attackRange)+ this.player.minDmg);
+      console.log(`${this.thisEnemy.name} Hit for ${dmg} physical dmg`)
+      this.enemyHp -= dmg;
+      // out.textContent = `You hit the ${this.thisEnemy.name} for ${dmg} dmg`;
+      // if(this.player.vamp)
+      //     this.pVamp();
+      // else if(this.player.stun)
+      //     this.pStun();
+      // else if(this.player.poison)
+      //     this.pPoison();
+      //thisEnemy killed
+      if (this.enemyHp <= 0){
+        console.log('Death!')
+        this.enemyKilled();
+          
+      } 
     }
     //miss
     else{
         console.log('Miss!')              
-    }        
-}
-thisEnemyAttack(){
-  //hit or miss
+    }
+    if (this.enemyHp > 0){
+      setTimeout(()=>{
+        this.enemyAttack()
+      },1000)
+    }
+  }
+  enemyAttack(){
+    //hit or miss
+    //let eOut = document.getElementById("attText");
+    let hitRange = (this.thisEnemy.maxHit - this.thisEnemy.minHit);
+    let toHit = Math.floor(Math.random() * (hitRange) + this.thisEnemy.minHit);
 
-  //let eOut = document.getElementById("attText");
-  let hitRange = this.thisEnemy.maxHit - this.thisEnemy.minHit;
-  let hit = Math.floor((Math.random() * hitRange) + this.thisEnemy.minHit);
+    //hit for random damage between min & max
 
-  //hit for random damage between min & max
-
-  if (hit >= this.player.evade){
+    if (toHit >= this.player.evade){
     //   if(this.heroImage != 'gifs/heroAttack.gif'){
     //       this.heroHit();
     //       setTimeout(()=>{this.heroHit(); this.setHeroImage(`gifs/hero1.gif`)},750);
     //   }          
-      let range = this.thisEnemy.maxDmg - this.thisEnemy.minDmg;
-      let dmg = Math.floor((Math.random() * range) + this.thisEnemy.minDmg);
+      let attackRange = (this.thisEnemy.maxDmg - this.thisEnemy.minDmg);
+      let dmg = Math.floor(Math.random() * (attackRange) + this.thisEnemy.minDmg);
+      console.log(`${this.thisEnemy.name} ${this.thisEnemy.attackStyle} for ${dmg} physical dmg`)
+
       this.player.hp -= dmg;
       //eOut.textContent = `${this.thisEnemy.name} ${this.thisEnemy.attack} for ${dmg} dmg`;
     //   if(this.thisEnemy.vamp)
@@ -153,19 +168,46 @@ thisEnemyAttack(){
     //       this.ePoison();
       if(this.player.hp < 1){}
           //this.playerKilled();     
-  }
-  //miss
-//   else{
-//       eOut.textContent = `${this.thisEnemy.name} Misses!`;
-//   }
     }
+    //miss
+    else{
+        console.log(`${this.thisEnemy.name} Misses!`);
+    }
+    this.wait=false;
+  }
 
 
-    
-   
+  merchantModal() {
+    const dialogRef = this.dialog.open(MerchantDialog, {
+      width: '700px',
+      data: {
+        merchantStock: {
+          mainWeapon: this.central.mainWeapon,
+          secondary: this.central.secondary,
+          armor: this.central.armor
+        },
+        playerGold: this.player.gold
+      }
+    });
+    dialogRef.afterClosed().subscribe(purchases => {
+      // if (purchases) {
+      //   this.runTask(aoTask);
+      // }
+    });
+  }
 
-
-    
-  
+  menuModal() {
+    const dialogRef = this.dialog.open(MenuDialog, {
+      width: '700px',
+      data: {
+        
+      }
+    });
+    dialogRef.afterClosed().subscribe(purchases => {
+      // if (purchases) {
+      //   this.runTask(aoTask);
+      // }
+    });
+  }
 }
 

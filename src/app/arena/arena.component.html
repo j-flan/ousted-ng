@@ -3,9 +3,14 @@ Player
 <p>Weapon: {{playerItem?.mainWeapon.name}}</p>
 <p>Attack: {{playerItem?.mainWeapon.minDmg}} - {{playerItem?.mainWeapon.maxDmg}}</p>
 <p>HP: {{player?.hp}}/{{player?.maxHp}}</p>
+<p>gold: {{player?.gold}}</p>
+<p>points: {{player?.points}}</p>
 <p></p>
+<div>
+    <button mat-raised-button (click)="merchantModal()">talk to Merchant</button><br>
+</div>
 <div *ngIf="enemyHp > 0">
-    <button mat-raised-button (click)="attack()">Attack</button><br>
+    <button mat-raised-button [disabled]="wait" (click)="attack()">Attack</button><br>
     Opponent
     <p>Name: {{this.thisEnemy?.name}}</p>
     <p>HP: {{enemyHp}}</p>
