@@ -11,7 +11,7 @@
       <mat-list>
         <mat-list-item *ngFor="let item of mainWeapons">
             <button  mat-raised-button (click)="buyItem(item)">
-                {{item.name}} 
+                {{item.name}}
                 minDmg: {{item.minDmg}}
                 maxDmg: {{item.maxDmg}}
                 dex: {{item.dex}}
@@ -35,7 +35,7 @@
         <mat-list>
         <mat-list-item *ngFor="let item of secondary">
             <button  mat-raised-button (click)="buyItem(item)">
-                {{item.name}} 
+                {{item.name}}
                 +minDmg: {{item.minDmg}}
                 +dex: {{item.dex}}
                 +hp: {{item.hp}}
@@ -58,7 +58,7 @@
         <mat-list>
         <mat-list-item *ngFor="let item of armor">
             <button  mat-raised-button (click)="buyItem(item)">
-                {{item.name}} 
+                {{item.name}}
                 defense: {{item.defense}}
                 evade: {{item.evade}}
                 cost:{{item.cost}}
@@ -68,6 +68,5 @@
     </mat-expansion-panel>
 </mat-accordion>
 <br>
-<button mat-raised-button (click)="cashOut()">Put in stash</button>
 <button mat-raised-button [mat-dialog-close]="bounty">Cash out</button>
 

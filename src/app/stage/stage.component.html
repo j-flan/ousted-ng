@@ -1,3 +1,6 @@
-<p>stage works! This is where the non text visuals are, starting in {{location.name}}</p>
-<button mat-raised-button (click)="changeLocationRandom()">change to random location</button>
-{{location?.name}}
+<div class="stage">
+  <button mat-raised-button (click)="changeLocationRandom()">change to random location</button>
+  {{location?.name}}
+  <img class="protagonist" src="../../assets/{{central.playerImage}}.gif" >
+  <img class="background" src="../../assets/dark-forest.gif" >
+</div>

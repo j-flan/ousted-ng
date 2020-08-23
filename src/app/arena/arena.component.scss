@@ -1,0 +1,88 @@
+.button-row {
+  min-width: 800px;
+  display: flexbox;
+  width: 70%;
+  height: 50px;
+  margin-left: 15%;
+  .get-enemy {
+    display: flex;
+    float: left;
+    width: 20%;
+    margin-left: 2%;
+  }
+  .menu {
+    display: flex;
+    float: left;
+    width: 20%;
+    margin-left: 2%;
+  }
+  .merchant {
+    display: flex;
+    float: left;
+    width: 20%;
+    margin-left: 2%;
+  }
+  .attack {
+    display: flex;
+    float: left;
+    width: 20%;
+    margin-left: 2%;
+  }
+}
+.status-row {
+  min-width: 800px;
+  margin-top: -10px;
+  width: 70%;
+  display: flex;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin-left: 15%;
+  .player-stats {
+    display: flexbox;
+    width: 20%;
+    margin-left: 10%;
+    p {
+      display: flex;
+      clear: left;
+      width: 100%;
+    }
+  }
+}
+.opponent-container {
+  display: flexbox;
+  clear: none;
+  width: 20%;
+  margin-left: 5%;
+  .opponent {
+    display: flexbox;
+    width: 100%;
+    h3 {
+      display: flex;
+      clear: left;
+      width: 100%;
+    }
+    p {
+      display: flex;
+      clear: left;
+      width: 100%;
+    }
+  }
+}
+.output {
+  display: flexbox;
+  clear: none;
+  margin-left: 4%;
+  width: 40%;
+  p {
+    display: flex;
+    clear: left;
+    width: 100%;
+  }
+  .last{
+    border-radius: 5px;
+    background-color: rgba(226, 226, 226, 0.5);
+    font-size: 1.2rem;
+    width: 100%;
+  }
+}
+

@@ -9,7 +9,7 @@ import { CentralService } from '../central.service'
 export class StageComponent implements OnInit {
 
   constructor(
-    protected central: CentralService,
+    public central: CentralService,
   ) { }
 
   location: any = this.central.getLocation();
@@ -17,7 +17,7 @@ export class StageComponent implements OnInit {
   ngOnInit(){
   }
   changeLocationRandom(){
-    let rand = Math.floor(Math.random() * this.central.areasArray.length -1); 
+    let rand = Math.floor(Math.random() * this.central.areasArray.length -1);
     this.central.setRandomLocation(rand)
     this.location = this.central.getLocation();
   }

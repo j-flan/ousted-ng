@@ -43,16 +43,11 @@ export class MerchantDialog implements OnInit {
     if (this.playerGold >= item.cost){
       this.inventory.push(item)
       this.playerGold -= item.cost
-    }
-    console.log('Inventory: ', this.inventory)
-  }
-  cashOut(){
-    if (this.inventory.length > 0){
       this.bounty = {
         gold: this.playerGold,
         loot: this.inventory
       }
-      console.log('cashing out: ', this.bounty)
     }
+    console.log('Inventory: ', this.inventory)
   }
 }

@@ -4,7 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CentralService {
-  
+
+  output: any = [];
+  playerImage: any = 'hero'
 
   constructor() {}
 
@@ -18,6 +20,12 @@ export class CentralService {
   setRandomLocation(rand) {
     let place = this.areasArray[rand];
     this.setLocation(this.areas[place.name]);
+  }
+  updateOutput(update){
+    this.output.push(update)
+    if (this.output.length > 5){
+      this.output.shift()
+    }
   }
 
   poison: boolean = false;
@@ -1090,15 +1098,6 @@ export class CentralService {
   location: any = this.areas.forest;
 
   mainWeapon: any = {
-    basicSword: {
-      type: 'main',
-      name: 'knife',
-      minDmg: 2,
-      maxDmg: 5,
-      dex: 7,
-      cost: 0,
-      special: '',
-    },
     shortSword: {
       type: 'main',
       name: 'Shortsword',
@@ -1173,13 +1172,6 @@ export class CentralService {
     },
   };
   armor: any = {
-    clothes: {
-      type: 'armor',
-      name: 'Soiled Clothes',
-      defense: 0,
-      evade: 7,
-      cost: 0,
-    },
     leatherArmor: {
       type: 'armor',
       name: 'Leather Armor',
@@ -1194,6 +1186,24 @@ export class CentralService {
       evade: 6,
       cost: 220,
     },
+  };
+  startingItems: any = {
+    clothes: {
+      type: 'armor',
+      name: 'Soiled Clothes',
+      defense: 0,
+      evade: 7,
+      cost: 0,
+    },
+    basicSword: {
+      type: 'main',
+      name: 'knife',
+      minDmg: 2,
+      maxDmg: 5,
+      dex: 7,
+      cost: 0,
+      special: ''
+    }
   };
   // accessory: any ={
   //   mercurialBoots: {

@@ -1,0 +1,28 @@
+.stage{
+  button{
+    z-index: 1;
+  }
+  display: flexbox;
+  width: 70%;
+  height: 500px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 15%;
+  .protagonist{
+    position: absolute;
+    top: 230px;
+    left: 20%;
+    z-index: 1000;
+    width: 380px;
+  }
+  .background{
+    position: absolute;
+    width: 70%;
+    max-height:500px;
+    min-width: 800px;
+    top: 60px;
+    left: 15%;
+    border-radius: 5px;
+    z-index: 0;
+  }
+}
