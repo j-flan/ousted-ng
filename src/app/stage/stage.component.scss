@@ -15,6 +15,14 @@
     z-index: 1000;
     width: 380px;
   }
+  .enemy{
+    position: absolute;
+    top: 200px;
+    left: 60%;
+    z-index: 2;
+    max-width: 380px;
+    min-width: 250px;
+  }
   .background{
     position: absolute;
     width: 70%;

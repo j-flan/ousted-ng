@@ -7,8 +7,13 @@ export class CentralService {
 
   output: any = [];
   playerImage: any = 'hero'
+  enemyImage: any;
 
   constructor() {}
+
+  randomPlaceholderImage(){
+    this.enemyImage = Math.floor(Math.random() * (15) + 1);
+  }
 
   getLocation() {
     return this.location;

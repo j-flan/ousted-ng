@@ -94,6 +94,7 @@ export class ArenaComponent implements OnInit {
     let rand = Math.floor(Math.random() * 4);
     this.thisEnemy = location.enemies[rand];
     this.central.updateOutput(`${this.thisEnemy.name} appears`);
+    this.central.randomPlaceholderImage();
     this.setNewEnemyHp(this.thisEnemy.hp);
     this.wait = false;
   }
@@ -103,6 +104,9 @@ export class ArenaComponent implements OnInit {
   enemyKilled() {
     this.player.gold += this.thisEnemy.gold;
     this.player.points += this.thisEnemy.points;
+    setTimeout(()=>{
+      this.central.enemyImage = false;
+    }, 1000)
     this.wait = false;
   }
   attackAnimation(){
@@ -177,14 +181,22 @@ export class ArenaComponent implements OnInit {
       //   else if(this.thisEnemy.poison)
       //       this.ePoison();
       if (this.player.hp < 1) {
+        this.playerKilled();
       }
-      //this.playerKilled();
     }
     //miss
     else {
       this.central.updateOutput(`${this.thisEnemy.name} Misses!`);
     }
     this.wait = false;
+  }
+
+  playerKilled(){
+    this.wait = true;
+    this.central.updateOutput(`${this.thisEnemy.name} Killed you!!!`);
+    setTimeout(()=>{
+      window.location.reload()
+    }, 2000)
   }
 
   merchantModal() {
