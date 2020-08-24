@@ -2,35 +2,23 @@
   <div class="inventory">
     <h2>Main-Hand Weapons</h2>
     <mat-selection-list [multiple]="false">
-        <mat-list-option
-            *ngFor="let item of weaponGroup"
-            [value]="item"
-            (click)="equipWeapon(item)"
-        >
-            {{item.name}}
-        </mat-list-option>
+      <mat-list-option *ngFor="let item of weaponGroup" [value]="item" (click)="equipWeapon(item)">
+        {{item.name}} - dmg: {{item.minDmg}}-{{item.maxDmg}} | dex: {{item.dex}} | sp: {{item.special}}
+      </mat-list-option>
     </mat-selection-list>
     <hr>
     <h2>Off-Hand Items</h2>
     <mat-selection-list [multiple]="false">
-        <mat-list-option
-            *ngFor="let item of secondaryGroup"
-            [value]="item"
-            (click)="equipSecondary(item)"
-        >
-            {{item.name}}
-        </mat-list-option>
+      <mat-list-option *ngFor="let item of secondaryGroup" [value]="item" (click)="equipSecondary(item)">
+        {{item.name}} - +dex: {{item.dex}} | +min: {{item.minDmg}} | +hp: {{item.hp}}
+      </mat-list-option>
     </mat-selection-list>
     <hr>
     <h2>Armor</h2>
     <mat-selection-list [multiple]="false">
-        <mat-list-option
-            *ngFor="let item of armorGroup"
-            [value]="item"
-            (click)="equipArmor(item)"
-        >
-            {{item.name}}
-        </mat-list-option>
+      <mat-list-option *ngFor="let item of armorGroup" [value]="item" (click)="equipArmor(item)">
+        {{item.name}} - def: {{item.defense}} | ev: {{item.evade}}
+      </mat-list-option>
     </mat-selection-list>
   </div>
   <div class="equipped">
@@ -41,4 +29,3 @@
   </div>
   <button class="save-button" mat-raised-button color="primary" [mat-dialog-close]="equip">Save</button>
 </div>
-

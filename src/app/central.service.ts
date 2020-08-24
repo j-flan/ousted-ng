@@ -4,15 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CentralService {
-
   output: any = [];
-  playerImage: any = 'hero'
+  playerImage: any = 'hero';
   enemyImage: any;
 
   constructor() {}
 
-  randomPlaceholderImage(){
-    this.enemyImage = Math.floor(Math.random() * (15) + 1);
+  randomPlaceholderImage() {
+    this.enemyImage = Math.floor(Math.random() * 15 + 1);
   }
 
   getLocation() {
@@ -20,16 +19,16 @@ export class CentralService {
   }
   setLocation(location) {
     this.location = location;
-    console.log('Have location: ', location)
+    console.log('Have location: ', location);
   }
   setRandomLocation(rand) {
     let place = this.areasArray[rand];
     this.setLocation(this.areas[place.name]);
   }
-  updateOutput(update){
-    this.output.push(update)
-    if (this.output.length > 5){
-      this.output.shift()
+  updateOutput(update) {
+    this.output.push(update);
+    if (this.output.length > 5) {
+      this.output.shift();
     }
   }
 
@@ -52,9 +51,6 @@ export class CentralService {
     toHit: 8,
     gold: 5,
     points: 50,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   goblins = {
     name: 'Goblin',
@@ -69,9 +65,6 @@ export class CentralService {
     toHit: 8,
     gold: 3,
     points: 10,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   elf = {
     name: 'Elf',
@@ -86,9 +79,6 @@ export class CentralService {
     toHit: 8,
     gold: 6,
     points: 30,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   bandit = {
     name: 'Bandit',
@@ -103,9 +93,6 @@ export class CentralService {
     toHit: 8,
     gold: 6,
     points: 30,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   marauder = {
     name: 'Marauder',
@@ -120,9 +107,6 @@ export class CentralService {
     toHit: 8,
     gold: 7,
     points: 40,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   wolves = {
     name: 'Wolf',
@@ -137,9 +121,6 @@ export class CentralService {
     toHit: 8,
     gold: 5,
     points: 30,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   wraith = {
     name: 'Wraith',
@@ -154,9 +135,6 @@ export class CentralService {
     toHit: 9,
     gold: 8,
     points: 50,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   mudMan = {
     name: 'Mud Man',
@@ -171,9 +149,6 @@ export class CentralService {
     toHit: 8,
     gold: 5,
     points: 40,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   poo = {
     name: 'Poo',
@@ -188,9 +163,6 @@ export class CentralService {
     toHit: 8,
     gold: 8,
     points: 70,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   leech = {
     name: 'Leech',
@@ -205,9 +177,8 @@ export class CentralService {
     toHit: 8,
     gold: 6,
     points: 35,
-    poison: false,
-    stun: false,
-    vamp: true,
+
+    special: 'vamp',
   };
   thrall = {
     name: 'Thrall',
@@ -222,9 +193,6 @@ export class CentralService {
     toHit: 8,
     gold: 12,
     points: 60,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   wyvren = {
     name: 'Wyvren',
@@ -239,9 +207,6 @@ export class CentralService {
     toHit: 8,
     gold: 11,
     points: 100,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   fSprite = {
     name: 'Fire Sprite',
@@ -256,9 +221,6 @@ export class CentralService {
     toHit: 9,
     gold: 15,
     points: 125,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   mimic = {
     name: 'Mimic',
@@ -273,9 +235,6 @@ export class CentralService {
     toHit: 9,
     gold: 20,
     points: 150,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   mTroll = {
     name: 'Mountain Troll',
@@ -290,9 +249,6 @@ export class CentralService {
     toHit: 8,
     gold: 20,
     points: 140,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   chaosEl = {
     name: 'Chaos Elemental',
@@ -307,9 +263,6 @@ export class CentralService {
     toHit: 10,
     gold: 28,
     points: 250,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   bat = {
     name: 'Vampire Bat',
@@ -324,9 +277,8 @@ export class CentralService {
     toHit: 9,
     gold: 13,
     points: 120,
-    poison: false,
-    stun: false,
-    vamp: true,
+
+    special: 'vamp',
   };
   fern = {
     name: 'Fern Feind',
@@ -341,9 +293,6 @@ export class CentralService {
     toHit: 9,
     gold: 15,
     points: 125,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   zombie = {
     name: 'Zombie',
@@ -358,9 +307,6 @@ export class CentralService {
     toHit: 9,
     gold: 20,
     points: 150,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   panther = {
     name: 'Panther',
@@ -375,9 +321,6 @@ export class CentralService {
     toHit: 9,
     gold: 20,
     points: 140,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   viper = {
     name: 'Viper',
@@ -392,9 +335,7 @@ export class CentralService {
     toHit: 9,
     gold: 15,
     points: 160,
-    poison: true,
-    stun: false,
-    vamp: false,
+    special: 'poison',
   };
   malboro = {
     name: 'Malboro',
@@ -409,9 +350,7 @@ export class CentralService {
     toHit: 9,
     gold: 25,
     points: 150,
-    poison: true,
-    stun: false,
-    vamp: false,
+    special: 'poison',
   };
   litchling = {
     name: 'Litchling',
@@ -426,9 +365,8 @@ export class CentralService {
     toHit: 9,
     gold: 20,
     points: 175,
-    poison: false,
-    stun: false,
-    vamp: true,
+
+    special: 'vamp',
   };
   crows = {
     name: 'Murder Crows',
@@ -443,9 +381,6 @@ export class CentralService {
     toHit: 9,
     gold: 25,
     points: 150,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   banshee = {
     name: 'Banshee',
@@ -460,9 +395,6 @@ export class CentralService {
     toHit: 9,
     gold: 18,
     points: 140,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   aElement = {
     name: 'Air Elemental',
@@ -477,9 +409,6 @@ export class CentralService {
     toHit: 9,
     gold: 20,
     points: 150,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   scorpion = {
     name: 'Crystal Scorpion',
@@ -494,9 +423,7 @@ export class CentralService {
     toHit: 9,
     gold: 17,
     points: 155,
-    poison: true,
-    stun: false,
-    vamp: false,
+    special: 'poison',
   };
   phantom = {
     name: 'Desert Phantom',
@@ -511,9 +438,6 @@ export class CentralService {
     toHit: 9,
     gold: 20,
     points: 150,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   wisp = {
     name: "Will-o'-the-wisp",
@@ -528,9 +452,6 @@ export class CentralService {
     toHit: 9,
     gold: 18,
     points: 140,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   taranTroll = {
     name: 'Taran-Troll',
@@ -545,9 +466,6 @@ export class CentralService {
     toHit: 9,
     gold: 20,
     points: 175,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   ants = {
     name: 'Komodo Ants',
@@ -562,9 +480,7 @@ export class CentralService {
     toHit: 9,
     gold: 15,
     points: 155,
-    poison: true,
-    stun: false,
-    vamp: false,
+    special: 'poison',
   };
   doppleganger = {
     name: 'Doppleganger',
@@ -579,9 +495,8 @@ export class CentralService {
     toHit: 9,
     gold: 18,
     points: 150,
-    poison: false,
-    stun: false,
-    vamp: true,
+
+    special: 'vamp',
   };
   miniBears = {
     name: 'Minibears',
@@ -596,9 +511,6 @@ export class CentralService {
     toHit: 9,
     gold: 20,
     points: 175,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   witch = {
     name: 'Hag Witch',
@@ -613,9 +525,8 @@ export class CentralService {
     toHit: 10,
     gold: 25,
     points: 220,
-    poison: false,
-    stun: true,
-    vamp: false,
+
+    special: 'stun',
   };
   mush = {
     name: 'Mush Man',
@@ -630,9 +541,7 @@ export class CentralService {
     toHit: 10,
     gold: 25,
     points: 200,
-    poison: true,
-    stun: false,
-    vamp: false,
+    special: 'poison',
   };
   centaur = {
     name: 'Centaur',
@@ -647,9 +556,6 @@ export class CentralService {
     toHit: 10,
     gold: 30,
     points: 250,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   drunk = {
     name: 'Drunkass',
@@ -664,9 +570,6 @@ export class CentralService {
     toHit: 8,
     gold: 10,
     points: 80,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   rat = {
     name: 'Sewer Rat',
@@ -681,9 +584,6 @@ export class CentralService {
     toHit: 9,
     gold: 15,
     points: 250,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   cultist = {
     name: 'Cultist',
@@ -698,9 +598,8 @@ export class CentralService {
     toHit: 8,
     gold: 12,
     points: 110,
-    poison: false,
-    stun: false,
-    vamp: true,
+
+    special: 'vamp',
   };
   scarabs = {
     name: 'Scarabs',
@@ -715,9 +614,8 @@ export class CentralService {
     toHit: 10,
     gold: 22,
     points: 165,
-    poison: false,
-    stun: true,
-    vamp: false,
+
+    special: 'stun',
   };
   pViper = {
     name: 'Pit Viper',
@@ -732,9 +630,7 @@ export class CentralService {
     toHit: 10,
     gold: 25,
     points: 200,
-    poison: true,
-    stun: false,
-    vamp: false,
+    special: 'poison',
   };
   spectre = {
     name: 'Spectre',
@@ -749,9 +645,6 @@ export class CentralService {
     toHit: 10,
     gold: 18,
     points: 220,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   chimera = {
     name: 'Chimera',
@@ -766,9 +659,7 @@ export class CentralService {
     toHit: 10,
     gold: 24,
     points: 220,
-    poison: true,
-    stun: false,
-    vamp: false,
+    special: 'poison',
   };
   golem = {
     name: 'Stone Golem',
@@ -783,9 +674,6 @@ export class CentralService {
     toHit: 10,
     gold: 30,
     points: 240,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   omegaTroll = {
     name: 'Omega Troll',
@@ -800,9 +688,6 @@ export class CentralService {
     toHit: 10,
     gold: 40,
     points: 275,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   sandMan = {
     name: 'Sandman',
@@ -817,9 +702,8 @@ export class CentralService {
     toHit: 10,
     gold: 28,
     points: 175,
-    poison: false,
-    stun: true,
-    vamp: false,
+
+    special: 'stun',
   };
   fBat = {
     name: 'Fire Bat',
@@ -834,9 +718,8 @@ export class CentralService {
     toHit: 10,
     gold: 30,
     points: 220,
-    poison: false,
-    stun: false,
-    vamp: true,
+
+    special: 'vamp',
   };
 
   //enemies
@@ -855,9 +738,6 @@ export class CentralService {
     toHit: 10,
     gold: 100,
     points: 1000,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   chaosDemon = {
     name: 'Chaos Demon',
@@ -872,9 +752,6 @@ export class CentralService {
     toHit: 9,
     gold: 50,
     points: 500,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   horde = {
     name: 'Necro Horde',
@@ -889,9 +766,6 @@ export class CentralService {
     toHit: 9,
     gold: 40,
     points: 600,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   gryphon = {
     name: 'Gryphon',
@@ -906,9 +780,6 @@ export class CentralService {
     toHit: 9,
     gold: 40,
     points: 600,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   litchKing = {
     name: 'Litch  King',
@@ -923,9 +794,8 @@ export class CentralService {
     toHit: 10,
     gold: 50,
     points: 800,
-    poison: false,
-    stun: false,
-    vamp: true,
+
+    special: 'vamp',
   };
   vandal = {
     name: 'Greasy Vandal',
@@ -940,9 +810,6 @@ export class CentralService {
     toHit: 9,
     gold: 0,
     points: 250,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
 
   //vandal is "mini-boss" that triggers victim event that awards the player with +25 maxHp
@@ -962,9 +829,6 @@ export class CentralService {
     toHit: 0,
     gold: 0,
     points: 0,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
   randomMerchant = {
     name: 'Random Merchant',
@@ -980,99 +844,96 @@ export class CentralService {
     toHit: 0,
     gold: 0,
     points: 0,
-    poison: false,
-    stun: false,
-    vamp: false,
   };
 
   areas = {
     forest: {
       name: 'forest',
-      enemies: [this.bear, this.goblins, this.elf, this.goblins]
+      enemies: [this.bear, this.goblins, this.elf, this.goblins],
     },
     merchantRoad: {
-      name:'merchantRoad',
-      enemies:[this.wolves, this.bandit, this.marauder, this.elf]
+      name: 'merchantRoad',
+      enemies: [this.wolves, this.bandit, this.marauder, this.elf],
     },
     swampRoad: {
       name: 'swampRoad',
-      enemies:[this.wolves, this.wraith, this.mudMan, this.leech]
+      enemies: [this.wolves, this.wraith, this.mudMan, this.leech],
     },
     cityRoad: {
-      name:'cityRoad',
-      enemies: [this.marauder, this.thrall, this.wyvren, this.bandit]
+      name: 'cityRoad',
+      enemies: [this.marauder, this.thrall, this.wyvren, this.bandit],
     },
     mountainRoad: {
       name: 'mountainRoad',
-      enemies:[this.fSprite, this.mimic, this.mTroll, this.bat]
+      enemies: [this.fSprite, this.mimic, this.mTroll, this.bat],
     },
     valleyRoad: {
       name: 'valleyRoad',
-      enemies: [this.fern, this.zombie, this.panther, this.malboro]
+      enemies: [this.fern, this.zombie, this.panther, this.malboro],
     },
     marshRoad: {
       name: 'marshRoad',
-      enemies:[this.litchling, this.crows, this.banshee, this.aElement]
+      enemies: [this.litchling, this.crows, this.banshee, this.aElement],
     },
     desertRoad: {
       name: 'desertRoad',
-      enemies:[this.scorpion, this.phantom, this.wisp, this.taranTroll]
+      enemies: [this.scorpion, this.phantom, this.wisp, this.taranTroll],
     },
     cliffsRoad: {
       name: 'cliffsRoad',
-      enemies: [this.ants, this.mimic, this.doppleganger, this.miniBears]
+      enemies: [this.ants, this.mimic, this.doppleganger, this.miniBears],
     },
     forestRoad: {
       name: 'forestRoad',
-      enemies:[this.witch, this.bat, this.mush, this.centaur]
+      enemies: [this.witch, this.bat, this.mush, this.centaur],
     },
     plainsRoad: {
       name: 'plainsRoad',
-      enemies: [this.chimera, this.crows, this.sandMan, this.golem]
+      enemies: [this.chimera, this.crows, this.sandMan, this.golem],
     },
     volcanoRoad: {
       name: 'volcanoRoad',
-      enemies: [this.chaosEl, this.fBat, this.omegaTroll, this.chimera]
+      enemies: [this.chaosEl, this.fBat, this.omegaTroll, this.chimera],
     },
     lake: {
       name: 'lake',
-      enemies: [this.leech, this.mudMan, this.lady, this.poo]
+      enemies: [this.leech, this.mudMan, this.lady, this.poo],
     },
     city: {
       name: 'city',
-      enemies: [this.drunk, this.vandal, this.rat, this.cultist]
+      enemies: [this.drunk, this.vandal, this.rat, this.cultist],
     },
     mountain: {
       name: 'mountain',
-      enemies: [this.fSprite, this.chaosDemon, this.mTroll, this.bat]
+      enemies: [this.fSprite, this.chaosDemon, this.mTroll, this.bat],
     },
     valley: {
       name: 'valley',
-      enemies: [this.fern, this.randomMerchant, this.viper, this.malboro]
+      enemies: [this.fern, this.randomMerchant, this.viper, this.malboro],
     },
     marsh: {
       name: 'marsh',
-      enemies: [this.litchling, this.horde, this.crows, this.aElement]
+      enemies: [this.litchling, this.horde, this.crows, this.aElement],
     },
     desert: {
       name: 'desert',
-      enemies: [this.scorpion, this.randomMerchant, this.wisp, this.taranTroll]
+      enemies: [this.scorpion, this.randomMerchant, this.wisp, this.taranTroll],
     },
     cliffs: {
       name: 'cliffs',
-      enemies: [this.ants, this.gryphon, this.crows, this.miniBears]
+      enemies: [this.ants, this.gryphon, this.crows, this.miniBears],
     },
     tomb: {
       name: 'tomb',
-      enemies: [this.scarabs, this.litchKing, this.pViper, this.spectre]
+      enemies: [this.scarabs, this.litchKing, this.pViper, this.spectre],
     },
     plains: {
       name: 'plains',
-      enemies: [this.chimera, this.sandMan, this.crows, this.golem]
+      enemies: [this.chimera, this.sandMan, this.crows, this.golem],
     },
     volcano: {
       name: 'volcano',
-      enemies: [this.chaosEl, this.chaos, this.omegaTroll, this.fBat]
+      enemies: [this.chaosEl, this.chaos, this.omegaTroll, this.fBat],
     },
   };
   //for randomized areas right now
@@ -1207,16 +1068,16 @@ export class CentralService {
       maxDmg: 5,
       dex: 7,
       cost: 0,
-      special: ''
+      special: '',
     },
-    fist:{
+    fist: {
       type: 'secondary',
       name: 'fist',
       dex: 0,
       minDmg: 0,
       hp: 0,
       cost: 0,
-    }
+    },
   };
   // accessory: any ={
   //   mercurialBoots: {

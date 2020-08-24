@@ -17,7 +17,7 @@
 
 <div class="status-row">
   <div class="player-stats">
-    <h2>HP: {{ player?.hp }}/{{ player?.maxHp }}</h2>
+    <h3><b>HP: {{ player?.hp }}/{{ player?.maxHp }}</b></h3>
     Weapon: {{ playerItem?.mainWeapon.name }}<br>
 
       Attack: {{ playerItem?.mainWeapon.minDmg }} -
@@ -32,9 +32,15 @@
   </div>
   <div class="opponent-container" >
     <div class="opponent" *ngIf="enemyHp > 0">
-      <h2>{{this.thisEnemy?.name }}</h2>
-      <h2>HP: {{ enemyHp }}</h2>
-    </div>
+      <h3><b>{{this.thisEnemy?.name }} - HP: {{ enemyHp }}</b></h3>
+        Attack: {{this.thisEnemy?.minDmg}} - {{this.thisEnemy?.maxDmg}}<br>
+        To Hit: {{this.thisEnemy?.minHit}} - {{this.thisEnemy?.maxHit}}<br>
+        speed: {{this.thisEnemy?.minFlee}} - {{this.thisEnemy?.maxFlee}}<br>
+        evade: {{this.thisEnemy?.toHit}}<br>
+        Ability: {{this.thisEnemy?.special}}<br>
+        gold: {{this.thisEnemy?.gold}}<br>
+        points: {{this.thisEnemy?.points}}
+      </div>
   </div>
   <div class="output">
     <p *ngFor="let out of central.output; let last = last"  [ngClass]="{last: last}">

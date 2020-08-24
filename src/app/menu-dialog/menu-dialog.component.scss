@@ -3,19 +3,19 @@
   .inventory{
     display: flexbox;
     float:left;
-    width: 49%;
+    width: 60%;
     border-right: 1px solid gray
   }
   .equipped{
     display: flexbox;
-    width: 45%;
+    width: 35%;
     float: left;
     margin-left: 4%;
   }
   .save-button{
     position: relative;
     bottom: -135px;
-    right: -275px;
+    right: -200px;
   }
 }
 
