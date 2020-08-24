@@ -130,7 +130,7 @@ export class ArenaComponent implements OnInit {
       let attackRange = this.player.maxDmg - this.player.minDmg;
       let dmg = Math.floor(Math.random() * attackRange + this.player.minDmg);
       this.central.updateOutput(
-        `${this.thisEnemy.name} Hit for ${dmg} physical dmg`
+        `${this.thisEnemy.name} was hit for ${dmg} physical dmg`
       );
       this.enemyHp -= dmg;
       // if(this.player.vamp)
@@ -165,10 +165,10 @@ export class ArenaComponent implements OnInit {
       let dmg = Math.floor(Math.random() * attackRange + this.thisEnemy.minDmg);
       let damage = (`${this.thisEnemy.name} ${this.thisEnemy.attackStyle} for ${dmg} physical dmg`)
       if(this.player.defense > 0){
-        damage += `- ${this.player.defense}`
+        damage += ` \(-${this.player.defense}\)`
       }
       this.central.updateOutput(damage);
-      this.player.hp -= dmg;
+      this.player.hp -= (dmg - this.player.defense);
       //   if(this.thisEnemy.vamp)
       //       this.eVamp();
       //   else if(this.thisEnemy.stun)
