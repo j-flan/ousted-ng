@@ -1188,7 +1188,7 @@ export class CentralService {
       type: 'armor',
       name: 'Studded Leather Armor',
       defense: 2,
-      evade: 6,
+      evade: 5,
       cost: 220,
     },
   };
@@ -1202,12 +1202,20 @@ export class CentralService {
     },
     basicSword: {
       type: 'main',
-      name: 'knife',
+      name: 'Dull Blade',
       minDmg: 2,
       maxDmg: 5,
       dex: 7,
       cost: 0,
       special: ''
+    },
+    fist:{
+      type: 'secondary',
+      name: 'fist',
+      dex: 0,
+      minDmg: 0,
+      hp: 0,
+      cost: 0,
     }
   };
   // accessory: any ={

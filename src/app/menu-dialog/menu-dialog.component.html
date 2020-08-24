@@ -1,33 +1,44 @@
-<h4>Main-Hand Weapons</h4>
-<mat-selection-list [multiple]="false">
-    <mat-list-option
-        *ngFor="let item of weaponGroup"
-        [value]="item"
-        (click)="equipWeapon(item)"
-    >
-        {{item.name}}
-    </mat-list-option>
-</mat-selection-list>
-<hr>
-<h4>Off-Hand Items</h4>
-<mat-selection-list [multiple]="false">
-    <mat-list-option
-        *ngFor="let item of secondaryGroup"
-        [value]="item"
-        (click)="equipSecondary(item)"
-    >
-        {{item.name}}
-    </mat-list-option>
-</mat-selection-list>
-<hr>
-<h4>Armor</h4>
-<mat-selection-list [multiple]="false">
-    <mat-list-option
-        *ngFor="let item of armorGroup"
-        [value]="item"
-        (click)="equipArmor(item)"
-    >
-        {{item.name}}
-    </mat-list-option>
-</mat-selection-list>
-<button mat-raised-button [mat-dialog-close]="equip">Save</button>
+<div class="dialog">
+  <div class="inventory">
+    <h2>Main-Hand Weapons</h2>
+    <mat-selection-list [multiple]="false">
+        <mat-list-option
+            *ngFor="let item of weaponGroup"
+            [value]="item"
+            (click)="equipWeapon(item)"
+        >
+            {{item.name}}
+        </mat-list-option>
+    </mat-selection-list>
+    <hr>
+    <h2>Off-Hand Items</h2>
+    <mat-selection-list [multiple]="false">
+        <mat-list-option
+            *ngFor="let item of secondaryGroup"
+            [value]="item"
+            (click)="equipSecondary(item)"
+        >
+            {{item.name}}
+        </mat-list-option>
+    </mat-selection-list>
+    <hr>
+    <h2>Armor</h2>
+    <mat-selection-list [multiple]="false">
+        <mat-list-option
+            *ngFor="let item of armorGroup"
+            [value]="item"
+            (click)="equipArmor(item)"
+        >
+            {{item.name}}
+        </mat-list-option>
+    </mat-selection-list>
+  </div>
+  <div class="equipped">
+    <h2>Equpped:</h2>
+    <h3><b>Main:</b> {{showEquipped?.mainWeapon?.name}}</h3>
+    <h3><b>Off-hand:</b> {{showEquipped?.secondary?.name}}</h3>
+    <h3><b>Armor:</b> {{showEquipped?.armor?.name}}</h3>
+  </div>
+  <button class="save-button" mat-raised-button color="primary" [mat-dialog-close]="equip">Save</button>
+</div>
+

@@ -67,6 +67,8 @@ export class ArenaComponent implements OnInit {
         this.player.dex = this.playerItem.mainWeapon.dex + item.dex;
       },
     });
+    this.playerSecondary.next(this.central.startingItems.fist);
+    this.inventory.push(this.central.startingItems.fist);
 
     this.playerArmor.subscribe({
       next: (item) => {
@@ -107,7 +109,7 @@ export class ArenaComponent implements OnInit {
     setTimeout(()=>{
       this.central.enemyImage = false;
     }, 1000)
-    this.wait = false;
+    this.wait = true;
   }
   attackAnimation(){
     this.central.playerImage = 'heroAttack'
@@ -125,21 +127,18 @@ export class ArenaComponent implements OnInit {
     console.log('Hit chance: ', hitChance);
     //hit for random damage between min & max
     if (this.player.dex >= hitChance) {
-      //this.hitAnimation();
       let attackRange = this.player.maxDmg - this.player.minDmg;
       let dmg = Math.floor(Math.random() * attackRange + this.player.minDmg);
       this.central.updateOutput(
         `${this.thisEnemy.name} Hit for ${dmg} physical dmg`
       );
       this.enemyHp -= dmg;
-      // out.textContent = `You hit the ${this.thisEnemy.name} for ${dmg} dmg`;
       // if(this.player.vamp)
       //     this.pVamp();
       // else if(this.player.stun)
       //     this.pStun();
       // else if(this.player.poison)
       //     this.pPoison();
-      //thisEnemy killed
       if (this.enemyHp <= 0) {
         this.central.updateOutput(`${this.thisEnemy.name} was slain`);
         this.enemyKilled();
@@ -160,19 +159,15 @@ export class ArenaComponent implements OnInit {
     let hitRange = this.thisEnemy.maxHit - this.thisEnemy.minHit;
     let toHit = Math.floor(Math.random() * hitRange + this.thisEnemy.minHit);
 
-    //hit for random damage between min & max
-
     if (toHit >= this.player.evade) {
-      //   if(this.heroImage != 'gifs/heroAttack.gif'){
-      //       this.heroHit();
-      //       setTimeout(()=>{this.heroHit(); this.setHeroImage(`gifs/hero1.gif`)},750);
-      //   }
+
       let attackRange = this.thisEnemy.maxDmg - this.thisEnemy.minDmg;
       let dmg = Math.floor(Math.random() * attackRange + this.thisEnemy.minDmg);
-      this.central.updateOutput(
-        `${this.thisEnemy.name} ${this.thisEnemy.attackStyle} for ${dmg} physical dmg`
-      );
-
+      let damage = (`${this.thisEnemy.name} ${this.thisEnemy.attackStyle} for ${dmg} physical dmg`)
+      if(this.player.defense > 0){
+        damage += `- ${this.player.defense}`
+      }
+      this.central.updateOutput(damage);
       this.player.hp -= dmg;
       //   if(this.thisEnemy.vamp)
       //       this.eVamp();
@@ -230,6 +225,7 @@ export class ArenaComponent implements OnInit {
       maxHeight: '850px',
       data: {
         inventory: this.inventory,
+        equipped: this.playerItem
       },
     });
     dialogRef.afterClosed().subscribe((gear) => {

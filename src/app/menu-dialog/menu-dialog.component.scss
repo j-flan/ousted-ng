@@ -1,0 +1,21 @@
+.dialog{
+  width: 100%;
+  .inventory{
+    display: flexbox;
+    float:left;
+    width: 49%;
+    border-right: 1px solid gray
+  }
+  .equipped{
+    display: flexbox;
+    width: 45%;
+    float: left;
+    margin-left: 4%;
+  }
+  .save-button{
+    position: relative;
+    bottom: -135px;
+    right: -275px;
+  }
+}
+

@@ -8,38 +8,38 @@
       talk to Merchant</button><br />
   </div>
   <div class="get-enemy">
-    <button mat-raised-button (click)="getEnemy()">Find New Opponent</button><br />
+    <button [disabled]="enemyHp > 0" mat-raised-button (click)="getEnemy()">Find New Opponent</button><br />
   </div>
   <div class="attack">
-    <button mat-raised-button [disabled]="wait || enemyHp < 1" (click)="attack()">Attack</button><br />
+    <button mat-raised-button [disabled]="wait || player.hp < 1" (click)="attack()">Attack</button><br />
   </div>
 </div>
 
 <div class="status-row">
   <div class="player-stats">
-    <h1>Player</h1>
     <h2>HP: {{ player?.hp }}/{{ player?.maxHp }}</h2>
-    <p>Weapon: {{ playerItem?.mainWeapon.name }}</p>
-    <p>
-      Attack: {{ playerItem?.mainWeapon.minDmg }} -
-      {{ playerItem?.mainWeapon.maxDmg }}
-    </p>
+    Weapon: {{ playerItem?.mainWeapon.name }}<br>
 
-    <p>gold: {{ player?.gold }}</p>
-    <p>points: {{ player?.points }}</p>
+      Attack: {{ playerItem?.mainWeapon.minDmg }} -
+      {{ playerItem?.mainWeapon.maxDmg }}<br>
+
+    dex: {{player.dex}}<br>
+    evade: {{player.evade}}<br>
+    defense: {{player?.defense}}<br>
+    gold: {{ player?.gold }}<br>
+    points: {{ player?.points }}<br>
 
   </div>
   <div class="opponent-container" >
-    <h1>Opponent</h1>
     <div class="opponent" *ngIf="enemyHp > 0">
+      <h2>{{this.thisEnemy?.name }}</h2>
       <h2>HP: {{ enemyHp }}</h2>
-      <p>Name: {{ this.thisEnemy?.name }}</p>
     </div>
   </div>
   <div class="output">
     <p *ngFor="let out of central.output; let last = last"  [ngClass]="{last: last}">
       {{out}}
-    </p>
+
   </div>
 </div>
 

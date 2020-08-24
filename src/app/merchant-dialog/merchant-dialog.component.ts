@@ -30,24 +30,34 @@ export class MerchantDialog implements OnInit {
   mainWeapons: any;
   secondary: any;
   armor: any;
-  panelOpenState: boolean = false
+  panelOpenState: boolean = false;
 
   ngOnInit(){
-    this.panelOpenState = false
-    this.mainWeapons = _.values(this.stock.mainWeapon)
-    this.secondary = _.values(this.stock.secondary)
-    this.armor = _.values(this.stock.armor)
+    this.panelOpenState = false;;
+    this.mainWeapons = _.values(this.stock.mainWeapon);
+    this.secondary = _.values(this.stock.secondary);
+    this.armor = _.values(this.stock.armor);
   }
   buyItem(item){
-    console.log('Bought Item: ', item)
+    console.log('Bought Item: ', item);
     if (this.playerGold >= item.cost){
-      this.inventory.push(item)
-      this.playerGold -= item.cost
-      this.bounty = {
-        gold: this.playerGold,
-        loot: this.inventory
-      }
-    }
-    console.log('Inventory: ', this.inventory)
+      this.inventory.push(item);
+      this.playerGold -= item.cost;
+      this.updateInventory();
+    };
+    console.log('Inventory: ', this.inventory);
+  }
+  updateInventory(){
+    this.bounty = {
+      gold: this.playerGold,
+      loot: this.inventory
+    };
+  }
+  removeItem(item){
+    this.inventory = _.filter(this.inventory, keep => {
+        return keep !== item;
+    });
+    this.playerGold += item.cost;
+    this.updateInventory();
   }
 }
