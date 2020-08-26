@@ -20,6 +20,13 @@
         {{item.name}} - def: {{item.defense}} | ev: {{item.evade}}
       </mat-list-option>
     </mat-selection-list>
+    <hr>
+    <h2>Items</h2>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option *ngFor="let item of ItemGroup" [value]="item" (click)="useItem(item)">
+        {{item.name}}
+      </mat-list-option>
+    </mat-selection-list>
   </div>
   <div class="equipped">
     <h2>Equpped:</h2>

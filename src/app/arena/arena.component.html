@@ -1,7 +1,7 @@
 
 <div class="button-row">
   <div class="menu">
-    <button mat-raised-button (click)="menuModal()">open inventory</button><br />
+    <button [disabled]="enemyHp > 0" mat-raised-button (click)="menuModal()">open inventory</button><br />
   </div>
   <div class="merchant">
     <button [disabled]="enemyHp > 0" mat-raised-button (click)="merchantModal()">
@@ -13,6 +13,9 @@
   <div class="attack">
     <button mat-raised-button [disabled]="wait || player.hp < 1" (click)="attack()">Attack</button><br />
   </div>
+  <!-- <div class="items">
+    <button mat-raised-button [disabled]="wait || player.hp < 1" (click)="itemsMenu()">Items</button><br />
+  </div> -->
 </div>
 
 <div class="status-row">

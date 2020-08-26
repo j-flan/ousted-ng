@@ -10,14 +10,14 @@
       </mat-expansion-panel-header>
       <mat-list>
         <mat-list-item *ngFor="let item of mainWeapons">
-            <button  mat-raised-button (click)="buyItem(item)">
+            <mat-option (click)="buyItem(item)">
                 {{item.name}}
                 minDmg: {{item.minDmg}}
                 maxDmg: {{item.maxDmg}}
                 dex: {{item.dex}}
                 cost:{{item.cost}}
                 special:{{item.special}}
-            </button>
+            </mat-option>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
@@ -34,13 +34,13 @@
         </mat-expansion-panel-header>
         <mat-list>
         <mat-list-item *ngFor="let item of secondary">
-            <button  mat-raised-button (click)="buyItem(item)">
+            <mat-option (click)="buyItem(item)">
                 {{item.name}}
                 +minDmg: {{item.minDmg}}
                 +dex: {{item.dex}}
                 +hp: {{item.hp}}
                 cost:{{item.cost}}
-            </button>
+            </mat-option>
         </mat-list-item>
         </mat-list>
     </mat-expansion-panel>
@@ -57,12 +57,12 @@
         </mat-expansion-panel-header>
         <mat-list>
         <mat-list-item *ngFor="let item of armor">
-            <button  mat-raised-button (click)="buyItem(item)">
+            <mat-option (click)="buyItem(item)">
                 {{item.name}}
                 defense: {{item.defense}}
                 evade: {{item.evade}}
                 cost:{{item.cost}}
-            </button>
+            </mat-option>
         </mat-list-item>
         </mat-list>
     </mat-expansion-panel>
@@ -74,16 +74,36 @@
       (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
       <mat-panel-title class="title">
-          Items List
+          Items
+      </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list>
+      <mat-list-item *ngFor="let item of items">
+          <mat-option (click)="buyItem(item)">
+              {{item.name}}
+              cost:{{item.cost}}
+          </mat-option>
+      </mat-list-item>
+      </mat-list>
+  </mat-expansion-panel>
+</mat-accordion>
+<br>
+<mat-accordion>
+  <mat-expansion-panel class="expansion-panel"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+      <mat-panel-title class="title">
+          Bag
       </mat-panel-title>
       </mat-expansion-panel-header>
       <mat-list>
       <mat-list-item *ngFor="let item of inventory">
-          <button  mat-raised-button (click)="removeItem(item)">
+          <mat-option (click)="removeItem(item)">
             Remove:
               {{item.name}}
               cost:{{item.cost}}
-          </button>
+          </mat-option>
       </mat-list-item>
       </mat-list>
   </mat-expansion-panel>

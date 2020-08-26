@@ -1111,4 +1111,30 @@ export class CentralService {
       cost: 30,
     },
   };
+  singleUseItems: any ={
+    smallHpPotion:{
+      type: 'Item',
+      name: 'Small hp potion',
+      hp: 25,
+      cost: 8
+    },
+    largeHpPotion:{
+      type: 'Item',
+      name: 'Large hp potion',
+      hp: 50,
+      cost: 20
+    },
+    powderBomb:{
+      type: 'Item',
+      name: 'Powder bomb',
+      dmg: 15,
+      cost: 10
+    },
+    shardBomb:{
+      type: 'Item',
+      name: 'Shard bomb',
+      dmg: 20,
+      cost: 15
+    }
+  }
 }

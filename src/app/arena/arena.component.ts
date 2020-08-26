@@ -203,6 +203,7 @@ export class ArenaComponent implements OnInit {
           mainWeapon: this.central.mainWeapon,
           secondary: this.central.secondary,
           armor: this.central.armor,
+          items: this.central.singleUseItems
         },
         playerGold: this.player.gold,
       },
@@ -225,7 +226,8 @@ export class ArenaComponent implements OnInit {
       maxHeight: '850px',
       data: {
         inventory: this.inventory,
-        equipped: this.playerItem
+        equipped: this.playerItem,
+        hp: this.player.hp
       },
     });
     dialogRef.afterClosed().subscribe((gear) => {
@@ -233,6 +235,13 @@ export class ArenaComponent implements OnInit {
         if (gear.weapon) this.playerWeapon.next(gear.weapon);
         if (gear.secondary) this.playerSecondary.next(gear.secondary);
         if (gear.armor) this.playerArmor.next(gear.armor);
+        if(gear.inventory){
+          this.inventory = gear.inventory;
+          this.player.hp = gear.hp;
+          if (gear.hp > this.player.maxHp){
+            this.player.hp = this.player.maxHp;
+          }
+        }
       }
     });
   }

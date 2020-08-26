@@ -30,6 +30,7 @@ export class MerchantDialog implements OnInit {
   mainWeapons: any;
   secondary: any;
   armor: any;
+  items: any;
   panelOpenState: boolean = false;
 
   ngOnInit(){
@@ -37,6 +38,7 @@ export class MerchantDialog implements OnInit {
     this.mainWeapons = _.values(this.stock.mainWeapon);
     this.secondary = _.values(this.stock.secondary);
     this.armor = _.values(this.stock.armor);
+    this.items = _.values(this.stock.items);
   }
   buyItem(item){
     console.log('Bought Item: ', item);
