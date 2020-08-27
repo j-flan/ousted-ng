@@ -56,9 +56,10 @@ export class MerchantDialog implements OnInit {
     };
   }
   removeItem(item){
-    this.inventory = _.filter(this.inventory, keep => {
-        return keep !== item;
+    let remove = _.findIndex(this.inventory, index => {
+        return index === item;
     });
+    this.inventory.splice(remove, 1);
     this.playerGold += item.cost;
     this.updateInventory();
   }

@@ -15,6 +15,7 @@ export class ArenaComponent implements OnInit {
   constructor(public central: CentralService, protected dialog: MatDialog) {}
 
   inventory: any = [];
+  items: any = [];
   wait: boolean = true;
   enemyHp: number;
   thisEnemy: any;
@@ -213,7 +214,10 @@ export class ArenaComponent implements OnInit {
         console.log('Have stash', stash);
         this.player.gold = stash.gold;
         _.forEach(stash.loot, (item) => {
-          this.inventory.push(item);
+          if (item.type === 'Item')
+            this.items.push(item);
+          else
+            this.inventory.push(item);
         });
         console.log('Updated inventory', this.inventory);
       }
@@ -227,6 +231,7 @@ export class ArenaComponent implements OnInit {
       data: {
         inventory: this.inventory,
         equipped: this.playerItem,
+        items: this.items,
         hp: this.player.hp
       },
     });
@@ -235,8 +240,8 @@ export class ArenaComponent implements OnInit {
         if (gear.weapon) this.playerWeapon.next(gear.weapon);
         if (gear.secondary) this.playerSecondary.next(gear.secondary);
         if (gear.armor) this.playerArmor.next(gear.armor);
-        if(gear.inventory){
-          this.inventory = gear.inventory;
+        if(gear.items){
+          this.items = gear.items;
           this.player.hp = gear.hp;
           if (gear.hp > this.player.maxHp){
             this.player.hp = this.player.maxHp;

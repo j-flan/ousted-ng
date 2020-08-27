@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 export interface MenuDialogData {
   inventory: any;
   equipped: any;
+  items: any;
   hp: any;
 }
 
@@ -20,6 +21,7 @@ export class MenuDialog implements OnInit {
   ) {
     this.inventory = this.data.inventory;
     this.equipped = this.data.equipped;
+    this.items = this.data.items;
     this.hp = this.data.hp;
   }
   showEquipped: any = {};
@@ -28,7 +30,7 @@ export class MenuDialog implements OnInit {
   weaponGroup: any = [];
   secondaryGroup: any = [];
   armorGroup: any = [];
-  ItemGroup: any = [];
+  itemGroup: any = [];
   equip: any = {};
   items: any;
   hp: any;
@@ -58,8 +60,6 @@ export class MenuDialog implements OnInit {
         this.weaponGroup.push(item);
       } else if (item.type === 'secondary') {
         this.secondaryGroup.push(item);
-      } else if (item.type === 'Item') {
-        this.ItemGroup.push(item);
       } else {
         this.armorGroup.push(item);
       }
@@ -83,22 +83,24 @@ export class MenuDialog implements OnInit {
   useItem(item){
     if (_.includes(item.name, 'potion')){
       this.hp += item.hp;
-      this.equip.hp = this.hp
-      this.removeItem(item)
-    }else{
-      console.log('Cant use item now')
+      this.equip.hp = this.hp;
+      this.removeItem(item);
     }
   }
   removeItem(item){
-    let potionArray = _.filter(this.inventory, potions => {
-      return potions === item;
+    if (_.includes(item.name, 'Large'))
+      this.findUsedPotion(item);
+    else if (_.includes(item.name, 'Small'))
+      this.findUsedPotion(item);
+    else
+      console.log('Cant use item now');
+  }
+  findUsedPotion(item){
+    let remove = _.findIndex(this.items, index=>{
+      return item === index
     });
-    _.remove(this.inventory, potions=>{
-      return potions = item;
-    })
-    _.forEach(potionArray, potion=>{
-      this.inventory.push(potion);
-    })
-    this.equip.inventory = this.inventory;
+    this.items.splice(remove, 1);
+    this.equip.items = this.items;
   }
 }
+
