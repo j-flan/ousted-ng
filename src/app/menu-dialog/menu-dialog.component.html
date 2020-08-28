@@ -46,6 +46,12 @@
     <h3><b>Main:</b> {{showEquipped?.mainWeapon?.name}}</h3>
     <h3><b>Off-hand:</b> {{showEquipped?.secondary?.name}}</h3>
     <h3><b>Armor:</b> {{showEquipped?.armor?.name}}</h3>
+    <p class="hp-output"><b>HP: {{hp}}/{{maxHp}}</b></p>
   </div>
-  <button class="save-button" mat-raised-button color="primary" [mat-dialog-close]="equip">Save</button>
+  <button class="save-button"
+    mat-raised-button color="primary"
+    [mat-dialog-close]="equip"
+  >
+    Save Changes
+  </button>
 </div>

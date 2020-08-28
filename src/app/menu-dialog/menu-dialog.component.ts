@@ -7,6 +7,7 @@ export interface MenuDialogData {
   equipped: any;
   items: any;
   hp: any;
+  maxHp: any;
 }
 
 @Component({
@@ -23,6 +24,7 @@ export class MenuDialog implements OnInit {
     this.equipped = this.data.equipped;
     this.items = this.data.items;
     this.hp = this.data.hp;
+    this.maxHp = this.data.maxHp;
   }
   showEquipped: any = {};
   equipped: any;
@@ -34,6 +36,9 @@ export class MenuDialog implements OnInit {
   equip: any = {};
   items: any;
   hp: any;
+  maxHp: any;
+  panelOpenState: boolean = false;
+
 
   ngOnInit(): void {
 
@@ -72,6 +77,9 @@ export class MenuDialog implements OnInit {
   }
   equipSecondary(item) {
     this.equip.secondary = item;
+    if(item.hp){
+      this.maxHp += item.hp;
+    }
     this.showEquipped.secondary = item;
     console.log('Secondary changed: ', item);
   }
@@ -83,14 +91,15 @@ export class MenuDialog implements OnInit {
   useItem(item){
     if (_.includes(item.name, 'potion')){
       this.hp += item.hp;
+      if (this.hp > this.maxHp){
+        this.hp = this.maxHp;
+      }
       this.equip.hp = this.hp;
       this.removeItem(item);
     }
   }
   removeItem(item){
-    if (_.includes(item.name, 'Large'))
-      this.findUsedPotion(item);
-    else if (_.includes(item.name, 'Small'))
+    if (_.includes(item.name, 'potion'))
       this.findUsedPotion(item);
     else
       console.log('Cant use item now');
