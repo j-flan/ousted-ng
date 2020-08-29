@@ -105,13 +105,33 @@ export class ArenaComponent implements OnInit {
   setNewEnemyHp(hp) {
     this.enemyHp = hp;
   }
-  enemyKilled() {
-    this.player.gold += this.thisEnemy.gold;
-    this.player.points += this.thisEnemy.points;
+  enemyKilled(killed) {
+    if (killed){
+      this.player.gold += this.thisEnemy.gold;
+      this.player.points += this.thisEnemy.points;
+    }else{
+      this.enemyHp = -1;
+    }
     setTimeout(() => {
       this.central.enemyImage = false;
     }, 1000);
     this.wait = true;
+  }
+  flee(){
+    let range = this.thisEnemy.maxFlee - this.thisEnemy.minFlee;
+    let strike = Math.floor((Math.random() * range) + this.thisEnemy.minFlee);
+    if (this.player.evade > strike){
+      this.central.updateOutput(`Ran away from the ${this.thisEnemy.name}!`);
+      this.enemyKilled(false);
+    }
+    else{
+      this.wait = true;
+      this.central.updateOutput(`Couldn't outrun the  ${this.thisEnemy.name}!`);
+      setTimeout(() => {
+        this.enemyAttack();
+      }, 1000);
+    }
+
   }
   attackAnimation() {
     this.central.playerImage = 'heroAttack';
@@ -121,7 +141,6 @@ export class ArenaComponent implements OnInit {
   }
   attack() {
     this.attackAnimation();
-    this.wait = true;
     console.log('maxDMG: ', this.player.maxDmg, 'minDmg', this.player.minDmg);
     //hit or miss
 
@@ -143,13 +162,14 @@ export class ArenaComponent implements OnInit {
       //     this.pPoison();
       if (this.enemyHp <= 0) {
         this.central.updateOutput(`${this.thisEnemy.name} was slain`);
-        this.enemyKilled();
+        this.enemyKilled(true);
       }
     }
     //miss
     else {
       this.central.updateOutput(`Player Misses!`);
     }
+    this.wait = true;
     if (this.enemyHp > 0) {
       setTimeout(() => {
         this.enemyAttack();
@@ -246,6 +266,14 @@ export class ArenaComponent implements OnInit {
       }
     });
   }
+  useItemBattle(item){
+    this.useItem(item)
+    this.wait = true;
+    setTimeout(() => {
+      this.enemyAttack();
+    }, 1000);
+
+  }
   useItem(item) {
     if (item) {
       if (_.includes(item.name, 'potion')) {
@@ -262,7 +290,7 @@ export class ArenaComponent implements OnInit {
       this.removeItem(item);
       if (this.enemyHp <= 0) {
         this.central.updateOutput(`${this.thisEnemy.name} was slain`);
-        this.enemyKilled();
+        this.enemyKilled(true);
       }
     }
   }

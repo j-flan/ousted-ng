@@ -10,17 +10,17 @@
   <div class="get-enemy">
     <button [disabled]="enemyHp > 0" mat-raised-button (click)="getEnemy()">Find New Opponent</button><br />
   </div>
-  <div class="attack" [hidden]="!enemyHp || enemyHp < 1">
+  <div class="attack">
     <button mat-raised-button [disabled]="wait || player.hp < 1" (click)="attack()">Attack</button><br />
   <div>
     <button class="item" mat-raised-button [disabled]="wait || player.hp < 1">
-      <mat-form-field  >
-Item
+      <mat-form-field>
+          Item
         <mat-select class="select">
           <mat-option class="option"
             *ngFor="let item of items"
             [value]="item"
-            (click)="useItem(item)"
+            (click)="useItemBattle(item)"
           >
             {{item.name}}
           </mat-option>
@@ -28,8 +28,13 @@ Item
       </mat-form-field>
     </button>
   </div>
+  <div class="flee">
+    <button mat-raised-button [disabled]="wait || player.hp < 1" (click)="flee()">Flee</button><br />
+  </div>
 </div>
 </div>
+
+
 
 <div class="status-row">
   <div class="player-stats">
