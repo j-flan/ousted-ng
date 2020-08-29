@@ -108,19 +108,19 @@ export class ArenaComponent implements OnInit {
   enemyKilled() {
     this.player.gold += this.thisEnemy.gold;
     this.player.points += this.thisEnemy.points;
-    setTimeout(()=>{
+    setTimeout(() => {
       this.central.enemyImage = false;
-    }, 1000)
+    }, 1000);
     this.wait = true;
   }
-  attackAnimation(){
-    this.central.playerImage = 'heroAttack'
-    setTimeout(()=>{
-      this.central.playerImage = 'hero'
-    }, 770)
+  attackAnimation() {
+    this.central.playerImage = 'heroAttack';
+    setTimeout(() => {
+      this.central.playerImage = 'hero';
+    }, 770);
   }
   attack() {
-    this.attackAnimation()
+    this.attackAnimation();
     this.wait = true;
     console.log('maxDMG: ', this.player.maxDmg, 'minDmg', this.player.minDmg);
     //hit or miss
@@ -162,15 +162,14 @@ export class ArenaComponent implements OnInit {
     let toHit = Math.floor(Math.random() * hitRange + this.thisEnemy.minHit);
 
     if (toHit >= this.player.evade) {
-
       let attackRange = this.thisEnemy.maxDmg - this.thisEnemy.minDmg;
       let dmg = Math.floor(Math.random() * attackRange + this.thisEnemy.minDmg);
-      let damage = (`${this.thisEnemy.name} ${this.thisEnemy.attackStyle} for ${dmg} physical dmg`)
-      if(this.player.defense > 0){
-        damage += ` \(-${this.player.defense}\)`
+      let damage = `${this.thisEnemy.name} ${this.thisEnemy.attackStyle} for ${dmg} physical dmg`;
+      if (this.player.defense > 0) {
+        damage += ` \(-${this.player.defense}\)`;
       }
       this.central.updateOutput(damage);
-      this.player.hp -= (dmg - this.player.defense);
+      this.player.hp -= dmg - this.player.defense;
       //   if(this.thisEnemy.vamp)
       //       this.eVamp();
       //   else if(this.thisEnemy.stun)
@@ -188,12 +187,12 @@ export class ArenaComponent implements OnInit {
     this.wait = false;
   }
 
-  playerKilled(){
+  playerKilled() {
     this.wait = true;
     this.central.updateOutput(`${this.thisEnemy.name} Killed you!!!`);
-    setTimeout(()=>{
-      window.location.reload()
-    }, 2000)
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   }
 
   merchantModal() {
@@ -205,7 +204,7 @@ export class ArenaComponent implements OnInit {
           mainWeapon: this.central.mainWeapon,
           secondary: this.central.secondary,
           armor: this.central.armor,
-          items: this.central.singleUseItems
+          items: this.central.singleUseItems,
         },
         playerGold: this.player.gold,
       },
@@ -215,10 +214,8 @@ export class ArenaComponent implements OnInit {
         console.log('Have stash', stash);
         this.player.gold = stash.gold;
         _.forEach(stash.loot, (item) => {
-          if (item.type === 'Item')
-            this.items.push(item);
-          else
-            this.inventory.push(item);
+          if (item.type === 'Item') this.items.push(item);
+          else this.inventory.push(item);
         });
         console.log('Updated inventory', this.inventory);
       }
@@ -234,7 +231,7 @@ export class ArenaComponent implements OnInit {
         equipped: this.playerItem,
         items: this.items,
         hp: this.player.hp,
-        maxHp: this.player.maxHp
+        maxHp: this.player.maxHp,
       },
     });
     dialogRef.afterClosed().subscribe((gear) => {
@@ -242,11 +239,37 @@ export class ArenaComponent implements OnInit {
         if (gear.weapon) this.playerWeapon.next(gear.weapon);
         if (gear.secondary) this.playerSecondary.next(gear.secondary);
         if (gear.armor) this.playerArmor.next(gear.armor);
-        if(gear.items){
+        if (gear.items) {
           this.items = gear.items;
           this.player.hp = gear.hp;
         }
       }
     });
+  }
+  useItem(item) {
+    if (item) {
+      if (_.includes(item.name, 'potion')) {
+        this.player.hp += item.hp;
+        if (this.player.hp > this.player.maxHp) {
+          this.player.hp = this.player.maxHp;
+        }
+      } else if (_.includes(item.name, 'bomb')) {
+        this.enemyHp -= item.dmg;
+        this.central.updateOutput(
+          `${item.name} thrown, dealing ${item.dmg} physical dmg to ${this.thisEnemy.name}`
+        );
+      }
+      this.removeItem(item);
+      if (this.enemyHp <= 0) {
+        this.central.updateOutput(`${this.thisEnemy.name} was slain`);
+        this.enemyKilled();
+      }
+    }
+  }
+  removeItem(item) {
+    let remove = _.findIndex(this.items, (index) => {
+      return item === index;
+    });
+    this.items.splice(remove, 1);
   }
 }

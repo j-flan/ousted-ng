@@ -10,12 +10,25 @@
   <div class="get-enemy">
     <button [disabled]="enemyHp > 0" mat-raised-button (click)="getEnemy()">Find New Opponent</button><br />
   </div>
-  <div class="attack">
+  <div class="attack" [hidden]="!enemyHp || enemyHp < 1">
     <button mat-raised-button [disabled]="wait || player.hp < 1" (click)="attack()">Attack</button><br />
+  <div>
+    <button class="item" mat-raised-button [disabled]="wait || player.hp < 1">
+      <mat-form-field  >
+Item
+        <mat-select class="select">
+          <mat-option class="option"
+            *ngFor="let item of items"
+            [value]="item"
+            (click)="useItem(item)"
+          >
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </button>
   </div>
-  <!-- <div class="items">
-    <button mat-raised-button [disabled]="wait || player.hp < 1" (click)="itemsMenu()">Items</button><br />
-  </div> -->
+</div>
 </div>
 
 <div class="status-row">

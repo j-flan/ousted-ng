@@ -39,9 +39,8 @@ export class MenuDialog implements OnInit {
   maxHp: any;
   panelOpenState: boolean = false;
 
-
   ngOnInit(): void {
-
+    this.equip.hp = this.hp;
     console.log('Have equipped items', this.equipped);
     this.sortInventory();
     this.passEquippedValues(
