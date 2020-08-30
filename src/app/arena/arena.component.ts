@@ -246,6 +246,7 @@ export class ArenaComponent implements OnInit {
     const dialogRef = this.dialog.open(MenuDialog, {
       width: '700px',
       maxHeight: '850px',
+      disableClose: true,
       data: {
         inventory: this.inventory,
         equipped: this.playerItem,
@@ -254,7 +255,7 @@ export class ArenaComponent implements OnInit {
         maxHp: this.player.maxHp,
       },
     });
-    dialogRef.afterClosed().subscribe((gear) => {
+    dialogRef.afterClosed().subscribe((gear?) => {
       if (gear) {
         if (gear.weapon) this.playerWeapon.next(gear.weapon);
         if (gear.secondary) this.playerSecondary.next(gear.secondary);
@@ -278,6 +279,9 @@ export class ArenaComponent implements OnInit {
     if (item) {
       if (_.includes(item.name, 'potion')) {
         this.player.hp += item.hp;
+        this.central.updateOutput(
+          `Drank ${item.name}`
+        );
         if (this.player.hp > this.player.maxHp) {
           this.player.hp = this.player.maxHp;
         }

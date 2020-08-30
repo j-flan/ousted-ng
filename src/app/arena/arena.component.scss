@@ -24,21 +24,7 @@
     width: 15%;
     margin-left: 2%;
   }
-  .attack {
-    display: flex;
-    float: left;
-    width: 30%;
-    font-size: 20;
-    margin-left: 2%;
-    margin-top: -20px;
-      button{
-        width: 100%;
-      }
-      button:disabled{
-        background-color: gray;
-      }
 
-    }
 
 }
 
@@ -50,34 +36,53 @@
   border: 1px solid gray;
   border-radius: 10px;
   margin-left: 15%;
+  .attack {
+    display: flexbox;
+    float: left;
+    width: 20%;
+    font-size: 20;
+    .select{
+      width: 60%;
+    }
+      button{
+        display: flex;
+        width: 100%;
+      }
+    }
   .player-stats {
     display: flexbox;
+    border: 1px solid gray;
+    border-radius: 5px;
     width: 20%;
-    margin-left: 10%;
-    p {
-      display: flex;
-      clear: left;
-      width: 100%;
+    height: 100%;
+    margin-left: 2%;
+    h3{
+      color: blue;
+      font-size: 1.1rem;
+      margin-top: 2%;
+      margin-bottom: -1%;
+    }
+    .player-data {
+      width: 90%;
+      margin-left: 10%;
     }
   }
 }
 .opponent-container {
   display: flexbox;
-  clear: none;
-  width: 20%;
-  margin-left: 5%;
+  border: 1px solid gray;
+    border-radius: 5px;
+    width: 20%;
+    height: 100%;
+    margin-left: 2%;
   .opponent {
     display: flexbox;
     width: 100%;
     h3 {
-      display: flex;
-      clear: left;
-      width: 100%;
-    }
-    p {
-      display: flex;
-      clear: left;
-      width: 100%;
+      color: blue;
+      font-size: 1.1rem;
+      margin-top: 2%;
+      margin-bottom: -1%;
     }
   }
 }
@@ -90,12 +95,14 @@
     display: flex;
     clear: left;
     width: 100%;
+    font-size: 1.2rem;
   }
   .last{
     border-radius: 5px;
     background-color: rgba(226, 226, 226, 0.5);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     width: 100%;
+    font-weight: bold;
   }
 }
 

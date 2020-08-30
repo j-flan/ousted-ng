@@ -1,19 +1,49 @@
 
 <div class="button-row">
   <div class="menu">
-    <button [disabled]="enemyHp > 0" mat-raised-button (click)="menuModal()">open inventory</button><br />
+    <button
+     [disabled]="enemyHp > 0"
+      mat-raised-button
+      (click)="menuModal()">
+      open inventory
+
+    </button>
   </div>
   <div class="merchant">
-    <button [disabled]="enemyHp > 0" mat-raised-button (click)="merchantModal()">
-      talk to Merchant</button><br />
+    <button
+     [disabled]="enemyHp > 0"
+      mat-raised-button
+      (click)="merchantModal()">
+      talk to Merchant
+    </button>
   </div>
   <div class="get-enemy">
-    <button [disabled]="enemyHp > 0" mat-raised-button (click)="getEnemy()">Find New Opponent</button><br />
+    <button
+     [disabled]="enemyHp > 0"
+       mat-raised-button
+      (click)="getEnemy()">
+      Find New Opponent
+
+    </button>
   </div>
+
+</div>
+
+
+
+<div class="status-row">
   <div class="attack">
-    <button mat-raised-button [disabled]="wait || player.hp < 1" (click)="attack()">Attack</button><br />
+    <button
+     mat-raised-button
+    [disabled]="wait || player.hp < 1"
+    (click)="attack()">
+      Attack
+
+    </button>
   <div>
-    <button class="item" mat-raised-button [disabled]="wait || player.hp < 1">
+    <button class="item"
+     mat-raised-button
+    [disabled]="wait || player.hp < 1">
       <mat-form-field>
           Item
         <mat-select class="select">
@@ -28,39 +58,42 @@
       </mat-form-field>
     </button>
   </div>
-  <div class="flee">
-    <button mat-raised-button [disabled]="wait || player.hp < 1" (click)="flee()">Flee</button><br />
+  <div >
+    <button
+    class="flee"
+    mat-raised-button
+    [disabled]="wait || player.hp < 1"
+    (click)="flee()"
+    >Flee
+  </button>
   </div>
 </div>
-</div>
-
-
-
-<div class="status-row">
   <div class="player-stats">
-    <h3><b>HP: {{ player?.hp }}/{{ player?.maxHp }}</b></h3>
-    Weapon: {{ playerItem?.mainWeapon.name }}<br>
+    <div class="player-data">
+      <h3><b>HP: {{ player?.hp }}/{{ player?.maxHp }}</b></h3>
+      <b>Weapon:</b> {{ playerItem?.mainWeapon.name }}<br>
 
-      Attack: {{ playerItem?.mainWeapon.minDmg }} -
-      {{ playerItem?.mainWeapon.maxDmg }}<br>
+        <b>Attack:</b> {{ playerItem?.mainWeapon.minDmg }} -
+        {{ playerItem?.mainWeapon.maxDmg }}<br>
 
-    dex: {{player.dex}}<br>
-    evade: {{player.evade}}<br>
-    defense: {{player?.defense}}<br>
-    gold: {{ player?.gold }}<br>
-    points: {{ player?.points }}<br>
+      <b>dex:</b> {{player.dex}}<br>
+      <b>evade:</b> {{player.evade}}<br>
+      <b>defense:</b> {{player?.defense}}<br>
+      <b>gold:</b> {{ player?.gold }}<br>
+      <b>points:</b> {{ player?.points }}<br>
+  </div>
 
   </div>
   <div class="opponent-container" >
     <div class="opponent" *ngIf="enemyHp > 0">
       <h3><b>{{this.thisEnemy?.name }} - HP: {{ enemyHp }}</b></h3>
-        Attack: {{this.thisEnemy?.minDmg}} - {{this.thisEnemy?.maxDmg}}<br>
-        To Hit: {{this.thisEnemy?.minHit}} - {{this.thisEnemy?.maxHit}}<br>
-        speed: {{this.thisEnemy?.minFlee}} - {{this.thisEnemy?.maxFlee}}<br>
-        evade: {{this.thisEnemy?.toHit}}<br>
-        Ability: {{this.thisEnemy?.special}}<br>
-        gold: {{this.thisEnemy?.gold}}<br>
-        points: {{this.thisEnemy?.points}}
+        <b>Attack:</b> {{this.thisEnemy?.minDmg}} - {{this.thisEnemy?.maxDmg}}<br>
+        <b>To Hit:</b> {{this.thisEnemy?.minHit}} - {{this.thisEnemy?.maxHit}}<br>
+        <b>speed:</b> {{this.thisEnemy?.minFlee}} - {{this.thisEnemy?.maxFlee}}<br>
+        <b>evade:</b> {{this.thisEnemy?.toHit}}<br>
+        <b>Ability:</b> {{this.thisEnemy?.special}}<br>
+        <b>gold:</b> {{this.thisEnemy?.gold}}<br>
+        <b>points:</b> {{this.thisEnemy?.points}}
       </div>
   </div>
   <div class="output">
