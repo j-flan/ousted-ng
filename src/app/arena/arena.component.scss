@@ -41,12 +41,18 @@
     float: left;
     width: 20%;
     font-size: 20;
+    margin-left: 5px;
     .select{
       width: 60%;
     }
       button{
         display: flex;
         width: 100%;
+        line-height: 57px;
+      }
+      button:disabled{
+        background-color: white;
+        color: lightgrey;
       }
     }
   .player-stats {
@@ -55,7 +61,6 @@
     border-radius: 5px;
     width: 20%;
     height: 100%;
-    margin-left: 2%;
     h3{
       color: blue;
       font-size: 1.1rem;
@@ -70,16 +75,16 @@
 }
 .opponent-container {
   display: flexbox;
-  border: 1px solid gray;
+  border: 1px solid #808080;
     border-radius: 5px;
     width: 20%;
     height: 100%;
-    margin-left: 2%;
   .opponent {
     display: flexbox;
-    width: 100%;
+    width: 90%;
+    margin-left: 10%;
     h3 {
-      color: blue;
+      color: green;
       font-size: 1.1rem;
       margin-top: 2%;
       margin-bottom: -1%;
@@ -89,7 +94,7 @@
 .output {
   display: flexbox;
   clear: none;
-  margin-left: 4%;
+  margin-left: 2%;
   width: 40%;
   p {
     display: flex;
