@@ -22,8 +22,8 @@ export class CentralService {
     console.log('Have location: ', location);
   }
   setRandomLocation(rand) {
-    let place = this.areasArray[rand];
-    this.setLocation(this.areas[place.name]);
+    let place = this.dangerZoneArray[rand];
+    this.setLocation(this.dangerZone[place.name]);
   }
   updateOutput(update) {
     this.output.push(update);
@@ -846,122 +846,228 @@ export class CentralService {
     points: 0,
   };
 
-  areas = {
+  dangerZone = {
     forest: {
       name: 'forest',
       enemies: [this.bear, this.goblins, this.elf, this.goblins],
+      nextAreas:{
+        west: 'merchantRoad',
+        east: 'swampRoad'
+      }
     },
     merchantRoad: {
       name: 'merchantRoad',
       enemies: [this.wolves, this.bandit, this.marauder, this.elf],
+      nextAreas:{
+        west: 'merchant'
+      }
     },
     swampRoad: {
       name: 'swampRoad',
       enemies: [this.wolves, this.wraith, this.mudMan, this.leech],
+      nextAreas:{
+        east: 'lake',
+        west: 'merchant'
+      }
     },
     cityRoad: {
       name: 'cityRoad',
       enemies: [this.marauder, this.thrall, this.wyvren, this.bandit],
+      nextAreas:{
+        south: 'city',
+        north: 'merchant'
+      }
     },
     mountainRoad: {
       name: 'mountainRoad',
       enemies: [this.fSprite, this.mimic, this.mTroll, this.bat],
+      nextAreas:{
+        west: 'mountain',
+        east: 'merchant'
+      }
     },
     valleyRoad: {
       name: 'valleyRoad',
       enemies: [this.fern, this.zombie, this.panther, this.malboro],
+      nextAreas:{
+        east: 'valley',
+        west: 'homestead'
+      }
     },
     marshRoad: {
       name: 'marshRoad',
       enemies: [this.litchling, this.crows, this.banshee, this.aElement],
+      nextAreas:{
+        east: 'marsh',
+        west: 'valley'
+      }
     },
     desertRoad: {
       name: 'desertRoad',
       enemies: [this.scorpion, this.phantom, this.wisp, this.taranTroll],
+      nextAreas:{
+        south: 'desert',
+        north: 'homestead'
+      }
     },
     cliffsRoad: {
       name: 'cliffsRoad',
       enemies: [this.ants, this.mimic, this.doppleganger, this.miniBears],
+      nextAreas:{
+        south: 'cliffs',
+        north: 'desert'
+      }
     },
     forestRoad: {
       name: 'forestRoad',
       enemies: [this.witch, this.bat, this.mush, this.centaur],
+      nextAreas:{
+        west: 'tomb',
+        east: 'homestead'
+      }
     },
     plainsRoad: {
       name: 'plainsRoad',
       enemies: [this.chimera, this.crows, this.sandMan, this.golem],
+      nextAreas:{
+        north: 'plains',
+        south: 'homestead'
+      }
     },
     volcanoRoad: {
       name: 'volcanoRoad',
       enemies: [this.chaosEl, this.fBat, this.omegaTroll, this.chimera],
+      nextAreas:{
+        north: 'volcano',
+        south: 'plains'
+      }
     },
     lake: {
       name: 'lake',
       enemies: [this.leech, this.mudMan, this.lady, this.poo],
+      nextAreas:{
+        west: 'swampRoad'
+      }
     },
-    city: {
-      name: 'city',
+    cityZone: {
+      name: 'cityZone',
       enemies: [this.drunk, this.vandal, this.rat, this.cultist],
+      nextAreas:{
+        west: 'city'
+      }
     },
     mountain: {
       name: 'mountain',
       enemies: [this.fSprite, this.chaosDemon, this.mTroll, this.bat],
+      nextAreas:{
+        east: 'merchant'
+      }
     },
     valley: {
       name: 'valley',
       enemies: [this.fern, this.randomMerchant, this.viper, this.malboro],
+      nextAreas:{
+        east: 'marshRoad',
+        west: 'valleyRoad'
+      }
     },
     marsh: {
       name: 'marsh',
       enemies: [this.litchling, this.horde, this.crows, this.aElement],
+      nextAreas:{
+        west: 'marshRoad'
+      }
     },
     desert: {
       name: 'desert',
       enemies: [this.scorpion, this.randomMerchant, this.wisp, this.taranTroll],
+      nextAreas:{
+        south: 'cliffsRoad',
+        north: 'desertRoad'
+      }
     },
     cliffs: {
       name: 'cliffs',
       enemies: [this.ants, this.gryphon, this.crows, this.miniBears],
+      nextAreas:{
+        north: 'cliffsRoad'
+      }
     },
     tomb: {
       name: 'tomb',
       enemies: [this.scarabs, this.litchKing, this.pViper, this.spectre],
+      nextAreas:{
+        east: 'forestRoad'
+      }
     },
     plains: {
       name: 'plains',
       enemies: [this.chimera, this.sandMan, this.crows, this.golem],
+      nextAreas:{
+        south: 'plainsRoad',
+        north: 'volcanoRoad'
+      }
     },
     volcano: {
       name: 'volcano',
       enemies: [this.chaosEl, this.chaos, this.omegaTroll, this.fBat],
+      nextAreas:{
+        south: 'volcanoRoad'
+      }
     },
   };
+  safeZone = {
+    merchant:{
+      name: 'merchant',
+      nextAreas:{
+        east: 'swampRoad',
+        west: 'mountainRoad',
+        south: 'cityRoad'
+      }
+    },
+    city:{
+      name: 'city',
+      nextAreas:{
+        east: 'cityZone',
+        north: 'merchantRoad'
+      }
+    },
+    homestead:{
+      name: 'homestead',
+      nextAreas:{
+        east: 'valleyRoad',
+        south: 'desertRoad',
+        west: 'forestRoad',
+        north: 'plainsRoad'
+      }
+    }
+  }
   //for randomized areas right now
-  areasArray = [
-    this.areas.forest,
-    this.areas.merchantRoad,
-    this.areas.swampRoad,
-    this.areas.cityRoad,
-    this.areas.mountainRoad,
-    this.areas.valleyRoad,
-    this.areas.marshRoad,
-    this.areas.desertRoad,
-    this.areas.cliffsRoad,
-    this.areas.forestRoad,
-    this.areas.plainsRoad,
-    this.areas.volcanoRoad,
-    this.areas.lake,
-    this.areas.city,
-    this.areas.mountain,
-    this.areas.valley,
-    this.areas.marsh,
-    this.areas.desert,
-    this.areas.cliffs,
-    this.areas.tomb,
-    this.areas.plains,
-    this.areas.volcano,
+  dangerZoneArray = [
+    this.dangerZone.forest,
+    this.dangerZone.merchantRoad,
+    this.dangerZone.swampRoad,
+    this.dangerZone.cityRoad,
+    this.dangerZone.mountainRoad,
+    this.dangerZone.valleyRoad,
+    this.dangerZone.marshRoad,
+    this.dangerZone.desertRoad,
+    this.dangerZone.cliffsRoad,
+    this.dangerZone.forestRoad,
+    this.dangerZone.plainsRoad,
+    this.dangerZone.volcanoRoad,
+    this.dangerZone.lake,
+    this.dangerZone.cityZone,
+    this.dangerZone.mountain,
+    this.dangerZone.valley,
+    this.dangerZone.marsh,
+    this.dangerZone.desert,
+    this.dangerZone.cliffs,
+    this.dangerZone.tomb,
+    this.dangerZone.plains,
+    this.dangerZone.volcano,
   ];
-  location: any = this.areas.forest;
+  location: any = this.dangerZone.forest;
 
   mainWeapon: any = {
     shortSword: {
