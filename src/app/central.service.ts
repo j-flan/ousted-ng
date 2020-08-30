@@ -21,10 +21,10 @@ export class CentralService {
     this.location = location;
     console.log('Have location: ', location);
   }
-  setRandomLocation(rand) {
-    let place = this.dangerZoneArray[rand];
-    this.setLocation(this.dangerZone[place.name]);
-  }
+  // setRandomLocation(rand) {
+  //   let place = this.dangerZoneArray[rand];
+  //   this.setLocation(this.dangerZone[place.name]);
+  // }
   updateOutput(update) {
     this.output.push(update);
     if (this.output.length > 5) {
@@ -846,7 +846,7 @@ export class CentralService {
     points: 0,
   };
 
-  dangerZone = {
+  areas = {
     forest: {
       name: 'forest',
       enemies: [this.bear, this.goblins, this.elf, this.goblins],
@@ -1015,8 +1015,6 @@ export class CentralService {
         south: 'volcanoRoad'
       }
     },
-  };
-  safeZone = {
     merchant:{
       name: 'merchant',
       nextAreas:{
@@ -1042,32 +1040,37 @@ export class CentralService {
       }
     }
   }
-  //for randomized areas right now
-  dangerZoneArray = [
-    this.dangerZone.forest,
-    this.dangerZone.merchantRoad,
-    this.dangerZone.swampRoad,
-    this.dangerZone.cityRoad,
-    this.dangerZone.mountainRoad,
-    this.dangerZone.valleyRoad,
-    this.dangerZone.marshRoad,
-    this.dangerZone.desertRoad,
-    this.dangerZone.cliffsRoad,
-    this.dangerZone.forestRoad,
-    this.dangerZone.plainsRoad,
-    this.dangerZone.volcanoRoad,
-    this.dangerZone.lake,
-    this.dangerZone.cityZone,
-    this.dangerZone.mountain,
-    this.dangerZone.valley,
-    this.dangerZone.marsh,
-    this.dangerZone.desert,
-    this.dangerZone.cliffs,
-    this.dangerZone.tomb,
-    this.dangerZone.plains,
-    this.dangerZone.volcano,
-  ];
-  location: any = this.dangerZone.forest;
+
+    //initialize location
+    location: any = this.areas.forest;
+
+  // areasArray = [
+  //   [{key: 'forest' , value: this.areas.forest}],
+  //   [{key: 'merchantRoad', value: this.areas.merchantRoad}],
+  //   [{key: 'swampRoad', value: this.areas.swampRoad}],
+  //   [{key: 'cityRoada', value: this.areas.cityRoad}],
+  //   [{key: 'mountainRoad', value: this.areas.mountainRoad}],
+  //   [{key: 'valleyRoad', value: this.areas.valleyRoad}],
+  //   [{key: 'marshRoad', value: this.areas.marshRoad}],
+  //   [{key: 'desertRoad', value: this.areas.desertRoad}],
+  //   [{key: 'cliffsRoad', value: this.areas.cliffsRoad}],
+  //   [{key: 'forestRoad', value: this.areas.forestRoad}],
+  //   [{key: 'plainsRoad', value: this.areas.plainsRoad}],
+  //   [{key: 'volcanoRoad', value: this.areas.volcanoRoad}],
+  //   [{key: 'lake', value: this.areas.lake}],
+  //   key: 'cityZone', value: this.areas.cityZone,
+  //   key: 'mountain', value: this.areas.mountain,
+  //   key: 'valley', value: this.areas.valley,
+  //   key: 'marsh', value: this.areas.marsh,
+  //   key: 'desert', value: this.areas.desert,
+  //   key: 'cliffs', value: this.areas.cliffs,
+  //   key: 'tomb', value: this.areas.tomb,
+  //   key: 'plains', value: this.areas.plains,
+  //   key: 'volcano', value: this.areas.volcano,
+  //   key: 'merchant', value: this.areas.merchant,
+  //   key: 'city', value: this.areas.city,
+  //   key: 'homestead', value: this.areas.homestead
+  // ];
 
   mainWeapon: any = {
     shortSword: {

@@ -1,7 +1,11 @@
 <div class="stage">
-  <button mat-raised-button (click)="changeLocationRandom()">change to random location</button>
+  <!-- <button mat-raised-button (click)="changeLocationRandom()">change to random location</button> -->
   {{location?.name}}
   <img class="protagonist" src="assets/{{central.playerImage}}.gif" *ngIf="central.enemyImage">
   <img class="background" src="assets/dark-forest.gif" >
   <img class="enemy" src="assets/{{central.enemyImage}}.gif" *ngIf="central.enemyImage" >
+  <button *ngIf="location?.nextAreas?.north" mat-raised-button class="north" (click)="goNorth()">NORTH ^</button>
+  <button *ngIf="location?.nextAreas?.south" mat-raised-button class="south" (click)="goSouth()" >SOUTH V</button>
+  <button *ngIf="location?.nextAreas?.east" mat-raised-button class="east"(click)="goEast()">EAST ></button>
+  <button *ngIf="location?.nextAreas?.west" mat-raised-button class="west" (click)="goWest()">< WEST</button>
 </div>
