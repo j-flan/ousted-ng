@@ -13,32 +13,37 @@ export class StageComponent implements OnInit {
     public central: CentralService,
   ) { }
 
-  location: any = this.central.getLocation();
-
+  location: any = this.central.location;
   ngOnInit(){
+    console.log('stage location: ', this.location)
   }
+
   // changeLocationRandom(){
   //   let rand = Math.floor(Math.random() * this.central.areas.length -1);
   //   this.central.setRandomLocation(rand)
   //   this.location = this.central.getLocation();
   // }
   goNorth(){
-    let place = this.central.location.north;
-    this.central.location = _.values(this.central.areas[place])
+    this.changeLocation(this.location.nextAreas.north);
   }
   goSouth(){
-    let place = this.central.location.south
-    this.central.location = _.values(this.central.areas[place])
-
-
+    this.changeLocation(this.location.nextAreas.south);
   }
   goEast(){
-    let place = this.central.location.east
-    this.central.location = _.values(this.central.areas[place])
-
+    this.changeLocation(this.location.nextAreas.east);
   }
   goWest(){
-    let place = this.central.location.west
-    this.central.location = _.values(this.central.areas[place])
+    this.changeLocation(this.location.nextAreas.west);
+  }
+  changeLocation(place){
+    let areasValues = _.values(this.central.areas)
+    let newArea = _.find(areasValues, area=>{
+      return area.name == place;
+    })
+    this.updateLocation(newArea);
+  }
+  updateLocation(newArea){
+    this.central.location = newArea;
+    this.location = newArea;
   }
 }

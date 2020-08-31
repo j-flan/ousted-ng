@@ -94,7 +94,7 @@ export class ArenaComponent implements OnInit {
   }
 
   getEnemy() {
-    let location = this.central.getLocation();
+    let location = this.central.location;
     let rand = Math.floor(Math.random() * 4);
     this.thisEnemy = location.enemies[rand];
     this.central.updateOutput(`${this.thisEnemy.name} appears`);

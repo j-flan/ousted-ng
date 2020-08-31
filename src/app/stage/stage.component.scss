@@ -34,15 +34,23 @@
     z-index: 0;
   }
   .north{
-
+    position: absolute;
+    top: 90px;
+    left: 45%;
   }
   .south{
-
+    position: absolute;
+    top: 450px;
+    left: 45%;
   }
   .east{
-
+    position: absolute;
+    top: 280px;
+    left: 70%;
   }
   .west{
-
+    position: absolute;
+    top: 280px;
+    left: 20%;
   }
 }

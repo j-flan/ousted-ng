@@ -14,13 +14,13 @@ export class CentralService {
     this.enemyImage = Math.floor(Math.random() * 15 + 1);
   }
 
-  getLocation() {
-    return this.location;
-  }
-  setLocation(location) {
-    this.location = location;
-    console.log('Have location: ', location);
-  }
+  // getLocation() {
+  //   return this.location;
+  // }
+  // setLocation(location) {
+  //   this.location = location;
+  //   console.log('Have location: ', location);
+  // }
   // setRandomLocation(rand) {
   //   let place = this.dangerZoneArray[rand];
   //   this.setLocation(this.dangerZone[place.name]);
@@ -960,7 +960,7 @@ export class CentralService {
       name: 'mountain',
       enemies: [this.fSprite, this.chaosDemon, this.mTroll, this.bat],
       nextAreas:{
-        east: 'merchant'
+        east: 'mountainRoad'
       }
     },
     valley: {
@@ -1027,7 +1027,8 @@ export class CentralService {
       name: 'city',
       nextAreas:{
         east: 'cityZone',
-        north: 'merchantRoad'
+        north: 'cityRoad',
+        south: 'homestead'
       }
     },
     homestead:{
