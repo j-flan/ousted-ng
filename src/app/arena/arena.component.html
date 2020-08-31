@@ -11,7 +11,7 @@
   </div>
   <div class="merchant">
     <button
-     [disabled]="enemyHp > 0"
+     [disabled]="enemyHp > 0 || central.location.name !== 'merchant'"
       mat-raised-button
       (click)="merchantModal()">
       talk to Merchant
