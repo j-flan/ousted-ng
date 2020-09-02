@@ -34,6 +34,12 @@ export class ArenaComponent implements OnInit {
   player: any = {};
 
   ngOnInit(): void {
+    this.central.enemyFound.subscribe({
+      next: enemy=>{
+        this.thisEnemy = enemy
+        this.setNewEnemyHp(enemy.hp)
+      }
+    })
     this.player = {
       minDmg: 0,
       maxDmg: 0,
@@ -93,17 +99,10 @@ export class ArenaComponent implements OnInit {
     this.playerSecondary.next(secondary);
   }
 
-  getEnemy() {
-    let location = this.central.location;
-    let rand = Math.floor(Math.random() * 4);
-    this.thisEnemy = location.enemies[rand];
-    this.central.updateOutput(`${this.thisEnemy.name} appears`);
-    this.central.randomPlaceholderImage();
-    this.setNewEnemyHp(this.thisEnemy.hp);
-    this.wait = false;
-  }
+
   setNewEnemyHp(hp) {
     this.enemyHp = hp;
+    this.wait = false;
   }
   enemyKilled(killed) {
     if (killed){

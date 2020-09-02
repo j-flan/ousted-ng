@@ -43,7 +43,7 @@ export class StageComponent implements OnInit {
     this.updateLocation(newArea);
   }
   updateLocation(newArea){
-    this.central.location = newArea;
     this.location = newArea;
+    this.central.getEnemy(newArea);
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -8,28 +8,35 @@ export class CentralService {
   playerImage: any = 'hero';
   enemyImage: any;
 
+
   constructor() {}
+
+  @Output() enemyFound = new EventEmitter<any>();
 
   randomPlaceholderImage() {
     this.enemyImage = Math.floor(Math.random() * 15 + 1);
   }
 
-  // getLocation() {
-  //   return this.location;
-  // }
-  // setLocation(location) {
-  //   this.location = location;
-  //   console.log('Have location: ', location);
-  // }
-  // setRandomLocation(rand) {
-  //   let place = this.dangerZoneArray[rand];
-  //   this.setLocation(this.dangerZone[place.name]);
-  // }
   updateOutput(update) {
     this.output.push(update);
     if (this.output.length > 5) {
       this.output.shift();
     }
+  }
+
+
+  getEnemy(newArea?) {
+    let rand = Math.floor(Math.random() * 4);
+    let enemy: any;
+    if(newArea){
+      this.location = newArea
+      enemy = newArea.enemies[rand];
+    }else{
+      enemy = this.location.enemies[rand];
+    }
+    this.enemyFound.emit(enemy);
+    this.updateOutput(`${enemy.name} appears`);
+    this.randomPlaceholderImage();
   }
 
   poison: boolean = false;
@@ -1041,9 +1048,8 @@ export class CentralService {
       }
     }
   }
-
-    //initialize location
-    location: any = this.areas.forest;
+  // initialize location
+  location: any = this.areas.forest;
 
   // areasArray = [
   //   [{key: 'forest' , value: this.areas.forest}],
