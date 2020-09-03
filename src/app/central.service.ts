@@ -11,6 +11,8 @@ export class CentralService {
 
   constructor() {}
 
+  merchantButtonDisabled: boolean = true;
+
   @Output() enemyFound = new EventEmitter<any>();
 
   randomPlaceholderImage() {
@@ -23,7 +25,6 @@ export class CentralService {
       this.output.shift();
     }
   }
-
 
   getEnemy(newArea?) {
     let rand = Math.floor(Math.random() * 4);
@@ -819,10 +820,197 @@ export class CentralService {
     points: 250,
   };
 
-  //vandal is "mini-boss" that triggers victim event that awards the player with +25 maxHp
 
-  //NPCs
-  lady = {
+  mainWeapon: any = {
+    shortSword: {
+      location: 'merchant',
+      type: 'main',
+      name: 'Shortsword',
+      minDmg: 3,
+      maxDmg: 6,
+      dex: 7,
+      cost: 10,
+      special: '',
+    },
+    longSword: {
+      location: 'merchant',
+      type: 'main',
+      name: 'Longsword',
+      minDmg: 4,
+      maxDmg: 9,
+      dex: 6,
+      cost: 15,
+      special: '',
+    },
+    phantomBane: {
+      location: 'lake',
+      type: 'main',
+      name: 'Phantombane',
+      minDmg: 5,
+      maxDmg: 8,
+      dex: 7,
+      cost: 0,
+      special: '',
+    },
+    bastardSword: {
+      location: 'city',
+      type: 'main',
+      name: 'Frozen Bastard Sword',
+      minDmg: 6,
+      maxDmg: 12,
+      dex: 6,
+      cost: 70,
+      special: 'stun',
+    },
+    voidRapier: {
+      location: 'city',
+      type: 'main',
+      name: 'Void Rapier',
+      minDmg: 5,
+      maxDmg: 11,
+      dex: 7,
+      cost: 60,
+      special: 'vamp',
+    },
+    coralKukri: {
+      location: 'valley',
+      type: 'main',
+      name: 'Coral Kukri',
+      minDmg: 6,
+      maxDmg: 11,
+      dex: 7,
+      cost: 60,
+      special: 'poison',
+    },
+    soultrapKatana: {
+      location: 'homestead',
+      type: 'main',
+      name: 'Soultrap Katana',
+      minDmg: 7,
+      maxDmg: 13,
+      dex: 7,
+      cost: 200,
+      special: 'vamp',
+    },
+    lightningAxe: {
+      location: 'tomb',
+      type: 'main',
+      name: 'Lightning Axe',
+      minDmg: 8,
+      maxDmg: 13,
+      dex: 6,
+      cost: 240,
+      special: 'stun',
+    },
+  };
+  armor: any = {
+    leatherArmor: {
+      location: 'merchant',
+      type: 'armor',
+      name: 'Leather Armor',
+      defense: 1,
+      evade: 6,
+      cost: 25,
+    },
+    studdedLeatherArmor: {
+      location: 'homestead',
+      type: 'armor',
+      name: 'Studded Leather Armor',
+      defense: 2,
+      evade: 5,
+      cost: 220,
+    },
+  };
+  startingItems: any = {
+    clothes: {
+      type: 'armor',
+      name: 'Soiled Clothes',
+      defense: 0,
+      evade: 7,
+      cost: 0,
+    },
+    basicSword: {
+      type: 'main',
+      name: 'Dull Blade',
+      minDmg: 2,
+      maxDmg: 5,
+      dex: 7,
+      cost: 0,
+      special: '',
+    },
+    fist: {
+      type: 'secondary',
+      name: 'fist',
+      dex: 0,
+      minDmg: 0,
+      hp: 0,
+      cost: 0,
+    },
+  };
+  // accessory: any ={
+  //   mercurialBoots: {
+  //     this.player.armor.evade += 1
+  // },
+  //   voidBangle: this.vamp = true
+  // }
+  secondary: any = {
+    parryingDagger: {
+      location: 'homestead',
+      type: 'secondary',
+      name: 'Parrying Dagger',
+      dex: 2,
+      minDmg: 1,
+      hp: 0,
+      cost: 150,
+    },
+    magicDagger: {
+      location: 'city',
+      type: 'secondary',
+      name: 'Magic Dagger',
+      dex: 1,
+      minDmg: 1,
+      hp: 0,
+      cost: 30,
+    },
+    magicShield: {
+      location: 'city',
+      type: 'secondary',
+      name: 'Magic Shield',
+      dex: 0,
+      minDmg: 0,
+      hp: 25,
+      cost: 30,
+    },
+  };
+  singleUseItems: any ={
+    smallHpPotion:{
+      type: 'Item',
+      name: 'Small hp potion',
+      hp: 25,
+      cost: 8
+    },
+    largeHpPotion:{
+      type: 'Item',
+      name: 'Large hp potion',
+      hp: 50,
+      cost: 20
+    },
+    powderBomb:{
+      type: 'Item',
+      name: 'Powder bomb',
+      dmg: 10,
+      cost: 10
+    },
+    shardBomb:{
+      type: 'Item',
+      name: 'Shard bomb',
+      dmg: 20,
+      cost: 20
+    }
+  }
+   //NPCs
+   lady = {
+    weapon: this.mainWeapon.phantombane,
     name: 'Lady of the Lake',
     ability: 'watery tart',
     hp: 1,
@@ -838,6 +1026,7 @@ export class CentralService {
     points: 0,
   };
   randomMerchant = {
+    weapon: this.mainWeapon.coralKukri,
     name: 'Random Merchant',
     ability: 'swindling',
     hp: 1,
@@ -852,6 +1041,10 @@ export class CentralService {
     gold: 0,
     points: 0,
   };
+
+  //vandal is "mini-boss" that triggers victim event that awards the player with +25 maxHp
+
+
 
   areas = {
     forest: {
@@ -1050,207 +1243,4 @@ export class CentralService {
   }
   // initialize location
   location: any = this.areas.forest;
-
-  // areasArray = [
-  //   [{key: 'forest' , value: this.areas.forest}],
-  //   [{key: 'merchantRoad', value: this.areas.merchantRoad}],
-  //   [{key: 'swampRoad', value: this.areas.swampRoad}],
-  //   [{key: 'cityRoada', value: this.areas.cityRoad}],
-  //   [{key: 'mountainRoad', value: this.areas.mountainRoad}],
-  //   [{key: 'valleyRoad', value: this.areas.valleyRoad}],
-  //   [{key: 'marshRoad', value: this.areas.marshRoad}],
-  //   [{key: 'desertRoad', value: this.areas.desertRoad}],
-  //   [{key: 'cliffsRoad', value: this.areas.cliffsRoad}],
-  //   [{key: 'forestRoad', value: this.areas.forestRoad}],
-  //   [{key: 'plainsRoad', value: this.areas.plainsRoad}],
-  //   [{key: 'volcanoRoad', value: this.areas.volcanoRoad}],
-  //   [{key: 'lake', value: this.areas.lake}],
-  //   key: 'cityZone', value: this.areas.cityZone,
-  //   key: 'mountain', value: this.areas.mountain,
-  //   key: 'valley', value: this.areas.valley,
-  //   key: 'marsh', value: this.areas.marsh,
-  //   key: 'desert', value: this.areas.desert,
-  //   key: 'cliffs', value: this.areas.cliffs,
-  //   key: 'tomb', value: this.areas.tomb,
-  //   key: 'plains', value: this.areas.plains,
-  //   key: 'volcano', value: this.areas.volcano,
-  //   key: 'merchant', value: this.areas.merchant,
-  //   key: 'city', value: this.areas.city,
-  //   key: 'homestead', value: this.areas.homestead
-  // ];
-
-  mainWeapon: any = {
-    shortSword: {
-      type: 'main',
-      name: 'Shortsword',
-      minDmg: 3,
-      maxDmg: 6,
-      dex: 7,
-      cost: 10,
-      special: '',
-    },
-    longSword: {
-      type: 'main',
-      name: 'Longsword',
-      minDmg: 4,
-      maxDmg: 9,
-      dex: 6,
-      cost: 15,
-      special: '',
-    },
-    phantomBane: {
-      type: 'main',
-      name: 'Phantombane',
-      minDmg: 5,
-      maxDmg: 8,
-      dex: 7,
-      cost: 0,
-      special: '',
-    },
-    bastardSword: {
-      type: 'main',
-      name: 'Frozen Bastard Sword',
-      minDmg: 6,
-      maxDmg: 12,
-      dex: 6,
-      cost: 70,
-      special: 'stun',
-    },
-    voidRapier: {
-      type: 'main',
-      name: 'Void Rapier',
-      minDmg: 5,
-      maxDmg: 11,
-      dex: 7,
-      cost: 60,
-      special: 'vamp',
-    },
-    coralKukri: {
-      type: 'main',
-      name: 'Coral Kukri',
-      minDmg: 6,
-      maxDmg: 11,
-      dex: 7,
-      cost: 60,
-      special: 'poison',
-    },
-    soultrapKatana: {
-      type: 'main',
-      name: 'Soultrap Katana',
-      minDmg: 7,
-      maxDmg: 13,
-      dex: 7,
-      cost: 200,
-      special: 'vamp',
-    },
-    lightningAxe: {
-      type: 'main',
-      name: 'Lightning Axe',
-      minDmg: 8,
-      maxDmg: 13,
-      dex: 6,
-      cost: 240,
-      special: 'stun',
-    },
-  };
-  armor: any = {
-    leatherArmor: {
-      type: 'armor',
-      name: 'Leather Armor',
-      defense: 1,
-      evade: 6,
-      cost: 15,
-    },
-    studdedLeatherArmor: {
-      type: 'armor',
-      name: 'Studded Leather Armor',
-      defense: 2,
-      evade: 5,
-      cost: 220,
-    },
-  };
-  startingItems: any = {
-    clothes: {
-      type: 'armor',
-      name: 'Soiled Clothes',
-      defense: 0,
-      evade: 7,
-      cost: 0,
-    },
-    basicSword: {
-      type: 'main',
-      name: 'Dull Blade',
-      minDmg: 2,
-      maxDmg: 5,
-      dex: 7,
-      cost: 0,
-      special: '',
-    },
-    fist: {
-      type: 'secondary',
-      name: 'fist',
-      dex: 0,
-      minDmg: 0,
-      hp: 0,
-      cost: 0,
-    },
-  };
-  // accessory: any ={
-  //   mercurialBoots: {
-  //     this.player.armor.evade += 1
-  // },
-  //   voidBangle: this.vamp = true
-  // }
-  secondary: any = {
-    parryingDagger: {
-      type: 'secondary',
-      name: 'Parrying Dagger',
-      dex: 2,
-      minDmg: 1,
-      hp: 0,
-      cost: 150,
-    },
-    magicDagger: {
-      type: 'secondary',
-      name: 'Magic Dagger',
-      dex: 1,
-      minDmg: 1,
-      hp: 0,
-      cost: 30,
-    },
-    magicShield: {
-      type: 'secondary',
-      name: 'Magic Shield',
-      dex: 0,
-      minDmg: 0,
-      hp: 25,
-      cost: 30,
-    },
-  };
-  singleUseItems: any ={
-    smallHpPotion:{
-      type: 'Item',
-      name: 'Small hp potion',
-      hp: 25,
-      cost: 8
-    },
-    largeHpPotion:{
-      type: 'Item',
-      name: 'Large hp potion',
-      hp: 50,
-      cost: 20
-    },
-    powderBomb:{
-      type: 'Item',
-      name: 'Powder bomb',
-      dmg: 15,
-      cost: 10
-    },
-    shardBomb:{
-      type: 'Item',
-      name: 'Shard bomb',
-      dmg: 20,
-      cost: 15
-    }
-  }
 }

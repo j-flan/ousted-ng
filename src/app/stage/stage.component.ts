@@ -43,6 +43,11 @@ export class StageComponent implements OnInit {
     this.updateLocation(newArea);
   }
   updateLocation(newArea){
+    if (newArea.name == 'merchant' || newArea.name == 'city' || newArea.name == 'homestead'){
+      this.central.merchantButtonDisabled = false;
+    }else{
+      this.central.merchantButtonDisabled = true;
+    }
     this.location = newArea;
     this.central.getEnemy(newArea);
   }

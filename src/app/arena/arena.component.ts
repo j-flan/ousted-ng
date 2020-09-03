@@ -224,7 +224,9 @@ export class ArenaComponent implements OnInit {
           secondary: this.central.secondary,
           armor: this.central.armor,
           items: this.central.singleUseItems,
+
         },
+        location: this.central.location,
         playerGold: this.player.gold,
       },
     });

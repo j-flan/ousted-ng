@@ -7,6 +7,7 @@ import * as _ from 'lodash'
 export interface MerchantDialogData {
   merchantStock: any;
   playerGold: number;
+  location: any;
 }
 
 @Component({
@@ -22,6 +23,7 @@ export class MerchantDialog implements OnInit {
   ) {
      this.stock = this.data.merchantStock
      this.playerGold = this.data.playerGold
+     this.location = this.data.location
   }
   bounty: any ={}
   inventory: any = [];
@@ -32,13 +34,29 @@ export class MerchantDialog implements OnInit {
   armor: any;
   items: any;
   panelOpenState: boolean = false;
+  location: any;
 
   ngOnInit(){
+    console.log('merchnt oninit location: ', this.location)
     this.panelOpenState = false;;
     this.mainWeapons = _.values(this.stock.mainWeapon);
     this.secondary = _.values(this.stock.secondary);
     this.armor = _.values(this.stock.armor);
     this.items = _.values(this.stock.items);
+    this.sortInventory()
+  }
+
+  sortInventory() {
+    this.mainWeapons = _.filter(this.mainWeapons, weapon=>{
+      return this.location.name === weapon.location
+    });
+    console.log('new main weapons', this.mainWeapons);
+    this.secondary = _.filter(this.secondary, weapon=>{
+      return this.location.name === weapon.location
+    });
+    this.armor = _.filter(this.armor, armor=>{
+      return this.location.name === armor.location
+    });
   }
   buyItem(item){
     console.log('Bought Item: ', item);

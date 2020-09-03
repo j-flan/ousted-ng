@@ -5,16 +5,16 @@
      [disabled]="enemyHp > 0"
       mat-raised-button
       (click)="menuModal()">
-      open inventory
+      Open Inventory
 
     </button>
   </div>
   <div class="merchant">
     <button
-     [disabled]="enemyHp > 0 || central.location.name !== 'merchant'"
+     [disabled]="enemyHp > 0 || central.merchantButtonDisabled"
       mat-raised-button
       (click)="merchantModal()">
-      talk to Merchant
+      Talk to Merchant
     </button>
   </div>
   <div class="get-enemy">
@@ -22,14 +22,10 @@
      [disabled]="enemyHp > 0"
        mat-raised-button
       (click)="central.getEnemy()">
-      Find New Opponent
-
+      Search Area
     </button>
   </div>
-
 </div>
-
-
 
 <div class="status-row">
   <div class="attack">
