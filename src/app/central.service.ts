@@ -34,8 +34,7 @@ export class CentralService {
       this.location = newArea
       if(newArea.enemies){
         enemy = newArea.enemies[rand];
-      }
-      else if(lastLocation.enemies){
+      }else if(lastLocation.enemies){
         enemy = lastLocation.enemies[rand]
       }
     }else{
@@ -43,7 +42,12 @@ export class CentralService {
     }
     this.enemyFound.emit(enemy);
     this.updateOutput(`${enemy.name} appears`);
-    this.randomPlaceholderImage();
+    if (enemy.img){
+      this.enemyImage = enemy.img;
+    }else{
+      this.randomPlaceholderImage();
+    }
+
   }
 
   poison: boolean = false;
@@ -54,6 +58,7 @@ export class CentralService {
 
   bear = {
     name: 'Bear',
+    img: 'bear',
     hp: 12,
     attackStyle: 'swipes',
     minDmg: 3,
@@ -68,6 +73,7 @@ export class CentralService {
   };
   goblins = {
     name: 'Goblin',
+    img: 'goblin',
     hp: 6,
     attackStyle: 'attack',
     minDmg: 1,
@@ -82,6 +88,7 @@ export class CentralService {
   };
   elf = {
     name: 'Elf',
+    img: 'elf',
     hp: 8,
     attackStyle: 'attacks',
     minDmg: 3,
@@ -96,6 +103,7 @@ export class CentralService {
   };
   bandit = {
     name: 'Bandit',
+    img: 'bandit',
     hp: 12,
     attackStyle: 'attacks',
     minDmg: 4,
@@ -110,6 +118,7 @@ export class CentralService {
   };
   marauder = {
     name: 'Marauder',
+    img: 'marauder',
     hp: 15,
     attackStyle: 'attacks',
     minDmg: 5,
@@ -124,6 +133,7 @@ export class CentralService {
   };
   wolves = {
     name: 'Wolf',
+    img: 'wolf',
     hp: 15,
     attackStyle: 'attack',
     minDmg: 2,

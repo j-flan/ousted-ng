@@ -19,7 +19,7 @@
   </div>
   <div class="get-enemy">
     <button
-     [disabled]="enemyHp > 0"
+     [disabled]="enemyHp > 0 || !central.location.enemies"
        mat-raised-button
       (click)="central.getEnemy()">
       Search Area
