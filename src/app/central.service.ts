@@ -30,8 +30,14 @@ export class CentralService {
     let rand = Math.floor(Math.random() * 4);
     let enemy: any;
     if(newArea){
+      let lastLocation = this.location;
       this.location = newArea
-      enemy = newArea.enemies[rand];
+      if(newArea.enemies){
+        enemy = newArea.enemies[rand];
+      }
+      else{
+        enemy = lastLocation.enemies[rand]
+      }
     }else{
       enemy = this.location.enemies[rand];
     }
