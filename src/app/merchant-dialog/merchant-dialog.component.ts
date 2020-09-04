@@ -37,6 +37,7 @@ export class MerchantDialog implements OnInit {
   location: any;
 
   ngOnInit(){
+    this.bounty.gold = this.playerGold;
     console.log('merchnt oninit location: ', this.location)
     this.panelOpenState = false;;
     this.mainWeapons = _.values(this.stock.mainWeapon);

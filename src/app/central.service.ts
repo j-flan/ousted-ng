@@ -35,7 +35,7 @@ export class CentralService {
       if(newArea.enemies){
         enemy = newArea.enemies[rand];
       }
-      else{
+      else if(lastLocation.enemies){
         enemy = lastLocation.enemies[rand]
       }
     }else{
