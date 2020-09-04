@@ -1064,6 +1064,7 @@ export class CentralService {
 
   areas = {
     forest: {
+      img: 'dark-forest.gif',
       name: 'forest',
       enemies: [this.bear, this.goblins, this.elf, this.goblins],
       nextAreas:{
@@ -1072,6 +1073,7 @@ export class CentralService {
       }
     },
     merchantRoad: {
+      img: 'road.gif',
       name: 'merchantRoad',
       enemies: [this.wolves, this.bandit, this.marauder, this.elf],
       nextAreas:{
@@ -1079,6 +1081,7 @@ export class CentralService {
       }
     },
     swampRoad: {
+      img: 'swampRoad.gif',
       name: 'swampRoad',
       enemies: [this.wolves, this.wraith, this.mudMan, this.leech],
       nextAreas:{
@@ -1087,6 +1090,7 @@ export class CentralService {
       }
     },
     cityRoad: {
+      img: 'road2.gif',
       name: 'cityRoad',
       enemies: [this.marauder, this.thrall, this.wyvren, this.bandit],
       nextAreas:{
@@ -1095,6 +1099,7 @@ export class CentralService {
       }
     },
     mountainRoad: {
+      img: 'mountain.gif',
       name: 'mountainRoad',
       enemies: [this.fSprite, this.mimic, this.mTroll, this.bat],
       nextAreas:{
@@ -1103,6 +1108,7 @@ export class CentralService {
       }
     },
     valleyRoad: {
+      img: 'valleyRoad.gif',
       name: 'valleyRoad',
       enemies: [this.fern, this.zombie, this.panther, this.malboro],
       nextAreas:{
@@ -1111,6 +1117,7 @@ export class CentralService {
       }
     },
     marshRoad: {
+      img: 'marsh.gif',
       name: 'marshRoad',
       enemies: [this.litchling, this.crows, this.banshee, this.aElement],
       nextAreas:{
@@ -1119,6 +1126,7 @@ export class CentralService {
       }
     },
     desertRoad: {
+      img: 'desert.gif',
       name: 'desertRoad',
       enemies: [this.scorpion, this.phantom, this.wisp, this.taranTroll],
       nextAreas:{
@@ -1127,6 +1135,7 @@ export class CentralService {
       }
     },
     cliffsRoad: {
+      img: 'road3.gif',
       name: 'cliffsRoad',
       enemies: [this.ants, this.mimic, this.doppleganger, this.miniBears],
       nextAreas:{
@@ -1135,6 +1144,7 @@ export class CentralService {
       }
     },
     forestRoad: {
+      img: 'forest.gif',
       name: 'forestRoad',
       enemies: [this.witch, this.bat, this.mush, this.centaur],
       nextAreas:{
@@ -1143,6 +1153,7 @@ export class CentralService {
       }
     },
     plainsRoad: {
+      img: 'plains.gif',
       name: 'plainsRoad',
       enemies: [this.chimera, this.crows, this.sandMan, this.golem],
       nextAreas:{
@@ -1151,6 +1162,7 @@ export class CentralService {
       }
     },
     volcanoRoad: {
+      img: 'mountain.gif',
       name: 'volcanoRoad',
       enemies: [this.chaosEl, this.fBat, this.omegaTroll, this.chimera],
       nextAreas:{
@@ -1159,6 +1171,7 @@ export class CentralService {
       }
     },
     lake: {
+      img: 'lake.gif',
       name: 'lake',
       enemies: [this.leech, this.mudMan, this.lady, this.poo],
       nextAreas:{
@@ -1166,6 +1179,7 @@ export class CentralService {
       }
     },
     cityZone: {
+      img: 'cityZone.jpg',
       name: 'cityZone',
       enemies: [this.drunk, this.vandal, this.rat, this.cultist],
       nextAreas:{
@@ -1173,6 +1187,7 @@ export class CentralService {
       }
     },
     mountain: {
+      img: 'mountain.gif',
       name: 'mountain',
       enemies: [this.fSprite, this.chaosDemon, this.mTroll, this.bat],
       nextAreas:{
@@ -1180,6 +1195,7 @@ export class CentralService {
       }
     },
     valley: {
+      img: 'valleyRoad.gif',
       name: 'valley',
       enemies: [this.fern, this.randomMerchant, this.viper, this.malboro],
       nextAreas:{
@@ -1188,6 +1204,7 @@ export class CentralService {
       }
     },
     marsh: {
+      img: 'marsh.gif',
       name: 'marsh',
       enemies: [this.litchling, this.horde, this.crows, this.aElement],
       nextAreas:{
@@ -1195,6 +1212,7 @@ export class CentralService {
       }
     },
     desert: {
+      img: 'desert.gif',
       name: 'desert',
       enemies: [this.scorpion, this.randomMerchant, this.wisp, this.taranTroll],
       nextAreas:{
@@ -1203,6 +1221,7 @@ export class CentralService {
       }
     },
     cliffs: {
+      img: 'plains.gif',
       name: 'cliffs',
       enemies: [this.ants, this.gryphon, this.crows, this.miniBears],
       nextAreas:{
@@ -1210,6 +1229,7 @@ export class CentralService {
       }
     },
     tomb: {
+      img: 'road.gif',
       name: 'tomb',
       enemies: [this.scarabs, this.litchKing, this.pViper, this.spectre],
       nextAreas:{
@@ -1217,6 +1237,7 @@ export class CentralService {
       }
     },
     plains: {
+      img: 'plains.gif',
       name: 'plains',
       enemies: [this.chimera, this.sandMan, this.crows, this.golem],
       nextAreas:{
@@ -1225,6 +1246,7 @@ export class CentralService {
       }
     },
     volcano: {
+      img: 'volcano.gif',
       name: 'volcano',
       enemies: [this.chaosEl, this.chaos, this.omegaTroll, this.fBat],
       nextAreas:{
@@ -1232,6 +1254,7 @@ export class CentralService {
       }
     },
     merchant:{
+      img: 'road.gif',
       name: 'merchant',
       nextAreas:{
         east: 'swampRoad',
@@ -1240,6 +1263,7 @@ export class CentralService {
       }
     },
     city:{
+      img: 'city.jpg',
       name: 'city',
       nextAreas:{
         east: 'cityZone',
@@ -1248,6 +1272,7 @@ export class CentralService {
       }
     },
     homestead:{
+      img: 'road2.gif',
       name: 'homestead',
       nextAreas:{
         east: 'valleyRoad',

@@ -2,7 +2,7 @@
   <!-- <button mat-raised-button (click)="changeLocationRandom()">change to random location</button> -->
   <h1><b>{{location?.name}}</b></h1>
   <img class="protagonist" src="assets/{{central.playerImage}}.gif" *ngIf="central.enemyImage">
-  <img class="background" src="assets/dark-forest.gif" >
+  <img class="background" src="assets/{{central.location.img}}" >
   <img class="enemy" src="assets/{{central.enemyImage}}.gif" *ngIf="central.enemyImage" >
   <div *ngIf="!central.enemyImage">
     <button *ngIf="location?.nextAreas?.north" mat-raised-button class="north" (click)="goNorth()">NORTH to {{location.nextAreas.north}}</button>
