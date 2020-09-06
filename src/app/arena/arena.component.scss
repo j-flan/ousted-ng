@@ -110,4 +110,24 @@
     font-weight: bold;
   }
 }
+.enemy-damage-output{
+  position: absolute;
+  color:white;
+    top: 250px;
+    left: 60%;
+    z-index: 2;
+    font-size: 50px;
+    // transition: all .7s linear;
+    // transform: translate(0px, -20px);
+}
+.player-damage-output{
+  position: absolute;
+  color: white;
+    top: 230px;
+    left: 20%;
+    font-size: 18px;
+    z-index: 1000;
+    // transition: all .7s linear;
+    // transform: translate(0px, -20px);
+}
 

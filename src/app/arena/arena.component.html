@@ -97,6 +97,12 @@
       {{out}}
 
   </div>
+  <div *ngIf="enemyDmgOutput" class="enemy-damage-output">
+    {{this.enemyDmg}}
+  </div>
+  <div *ngIf="playerDmgOutput" class="player-damage-output">
+    {{this.playerDmg}}
+  </div>
 </div>
 
 
