@@ -36,8 +36,10 @@ export class ArenaComponent implements OnInit {
   ngOnInit(): void {
     this.central.enemyFound.subscribe({
       next: enemy=>{
-        this.thisEnemy = enemy
-        this.setNewEnemyHp(enemy.hp)
+        if(enemy){
+          this.thisEnemy = enemy
+          this.setNewEnemyHp(enemy.hp)
+        }
       }
     })
     this.player = {
@@ -147,6 +149,12 @@ export class ArenaComponent implements OnInit {
     console.log('Hit chance: ', hitChance);
     //hit for random damage between min & max
     if (this.player.dex >= hitChance) {
+      setTimeout(()=>{
+        this.central.enemySlash = true;
+      }, 500);
+      setTimeout(()=>{
+        this.central.enemySlash = false;
+      }, 700);
       let attackRange = this.player.maxDmg - this.player.minDmg;
       let dmg = Math.floor(Math.random() * attackRange + this.player.minDmg);
       this.central.updateOutput(
@@ -172,15 +180,25 @@ export class ArenaComponent implements OnInit {
     if (this.enemyHp > 0) {
       setTimeout(() => {
         this.enemyAttack();
-      }, 1000);
+      }, 2000);
     }
   }
   enemyAttack() {
+    this.central.enemyAttackMove = 'enemyStrike';
+    setTimeout(()=>{
+      this.central.enemyAttackMove = 'enemyRest';
+    }, 99);
     //hit or miss
     let hitRange = this.thisEnemy.maxHit - this.thisEnemy.minHit;
     let toHit = Math.floor(Math.random() * hitRange + this.thisEnemy.minHit);
 
     if (toHit >= this.player.evade) {
+      setTimeout(()=>{
+        this.central.playerSlash = true;
+      }, 200);
+      setTimeout(()=>{
+        this.central.playerSlash = false;
+      }, 700);
       let attackRange = this.thisEnemy.maxDmg - this.thisEnemy.minDmg;
       let dmg = Math.floor(Math.random() * attackRange + this.thisEnemy.minDmg);
       let damage = `${this.thisEnemy.name} ${this.thisEnemy.attackStyle} for ${dmg} physical dmg`;
@@ -201,7 +219,11 @@ export class ArenaComponent implements OnInit {
     }
     //miss
     else {
-      this.central.updateOutput(`${this.thisEnemy.name} Misses!`);
+      this.central.updateOutput(`${this.thisEnemy.name} attack blocked!`);
+      this.central.playerImage = 'heroBlock';
+      setTimeout(()=>{
+        this.central.playerImage = 'hero';
+      }, 700)
     }
     this.wait = false;
   }
@@ -271,9 +293,11 @@ export class ArenaComponent implements OnInit {
   useItemBattle(item){
     this.useItem(item)
     this.wait = true;
-    setTimeout(() => {
-      this.enemyAttack();
-    }, 1000);
+    if (this.enemyHp > 0) {
+      setTimeout(() => {
+        this.enemyAttack();
+      }, 1000);
+    }
 
   }
   useItem(item) {

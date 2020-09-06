@@ -12,6 +12,10 @@ export class CentralService {
   constructor() {}
 
   merchantButtonDisabled: boolean = true;
+  playerSlash: boolean = false;
+  enemySlash: boolean = false;
+
+  enemyAttackMove: string = 'enemyRest';
 
   @Output() enemyFound = new EventEmitter<any>();
 
@@ -28,7 +32,7 @@ export class CentralService {
 
   getEnemy(newArea?) {
     let rand = Math.floor(Math.random() * 4);
-    let enemy: any;
+    let enemy: any = false;
     if(newArea){
       let lastLocation = this.location;
       this.location = newArea
@@ -36,6 +40,8 @@ export class CentralService {
         enemy = newArea.enemies[rand];
       }else if(lastLocation.enemies){
         enemy = lastLocation.enemies[rand]
+      }else{
+        return;
       }
     }else{
       enemy = this.location.enemies[rand];
