@@ -19,10 +19,13 @@ export class ArenaComponent implements OnInit {
   wait: boolean = true;
   enemyHp: number;
   thisEnemy: any;
-  playerDmg: number;
-  enemyDmg: number;
+  playerDmg: any;
+  enemyDmg: any;
   enemyDmgOutput: boolean=false;
   playerDmgOutput: boolean=false;
+  playerDmgOutputMove: string = 'player-dmg-output-start'
+  enemyDmgOutputMove: string = 'enemy-dmg-output-start'
+
 
   playerWeapon = new Subject<any>();
   playerArmor = new Subject<any>();
@@ -70,8 +73,8 @@ export class ArenaComponent implements OnInit {
         console.log('dex: ', this.player.dex);
       },
     });
-    this.playerWeapon.next(this.central.startingItems.basicSword);
-    this.inventory.push(this.central.startingItems.basicSword);
+    this.playerWeapon.next(this.central.mainWeapon.soultrapKatana);
+    this.inventory.push(this.central.mainWeapon.soultrapKatana);
 
     this.playerSecondary.subscribe({
       next: (item) => {
@@ -139,11 +142,14 @@ export class ArenaComponent implements OnInit {
 
   }
   playerDoesDamage(){
+
     setTimeout(()=>{
       this.enemyDmgOutput = true;
+      this.enemyDmgOutputMove = 'enemy-dmg-output-end'
     }, 500);
     setTimeout(()=>{
       this.enemyDmgOutput = false;
+      this.enemyDmgOutputMove = 'enemy-dmg-output-start'
     }, 1500);
     setTimeout(()=>{
       this.central.enemySlash = true;
@@ -162,9 +168,12 @@ export class ArenaComponent implements OnInit {
   enemyDoesDamage(){
     setTimeout(()=>{
       this.playerDmgOutput = true;
+      this.playerDmgOutputMove = 'player-dmg-output-end';
     }, 200);
     setTimeout(()=>{
       this.playerDmgOutput = false;
+      this.playerDmgOutputMove = 'player-dmg-output-start';
+
     }, 1500);
     setTimeout(()=>{
       this.central.playerSlash = true;
@@ -173,8 +182,29 @@ export class ArenaComponent implements OnInit {
       this.central.playerSlash = false;
     }, 700);
   }
+  playerWeaponSpecial(){
+    let special = this.playerItem.mainWeapon.special;
+      if(special == 'vamp'){
+        this.player.hp += 1;
+        this.playerDmg = `+1`;
+        if (this.player.hp > this.player.maxHp){
+          this.player.hp > this.player.maxHp;
+        }
+        setTimeout(()=>{
+          this.playerDmgOutput = true;
+          this.playerDmgOutputMove = 'player-dmg-output-end';
+        }, 500);
+        setTimeout(()=>{
+          this.playerDmgOutput = false;
+          this.playerDmgOutputMove = 'player-dmg-output-start';
+        }, 1500);
+      }
+      // else if(this.player.stun)
+      //     this.pStun();
+      // else if(this.player.poison)
+      //     this.pPoison();
+  }
   attack() {
-    this.playerDoesDamage();
     this.attackAnimation();
     console.log('maxDMG: ', this.player.maxDmg, 'minDmg', this.player.minDmg);
     //hit or miss
@@ -183,19 +213,17 @@ export class ArenaComponent implements OnInit {
     console.log('Hit chance: ', hitChance);
     //hit for random damage between min & max
     if (this.player.dex >= hitChance) {
-
+      this.playerDoesDamage();
       let attackRange = this.player.maxDmg - this.player.minDmg;
       this.enemyDmg = Math.floor(Math.random() * attackRange + this.player.minDmg);
       this.central.updateOutput(
         `${this.thisEnemy.name} was hit for ${this.enemyDmg} physical dmg`
       );
       this.enemyHp -= this.enemyDmg;
-      // if(this.player.vamp)
-      //     this.pVamp();
-      // else if(this.player.stun)
-      //     this.pStun();
-      // else if(this.player.poison)
-      //     this.pPoison();
+      if(this.playerItem.mainWeapon.special){
+       this.playerWeaponSpecial();
+      }
+
       if (this.enemyHp <= 0) {
         this.central.updateOutput(`${this.thisEnemy.name} was slain`);
         this.enemyKilled(true);

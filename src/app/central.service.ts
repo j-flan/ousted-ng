@@ -852,7 +852,7 @@ export class CentralService {
       maxDmg: 6,
       dex: 7,
       cost: 10,
-      special: '',
+
     },
     longSword: {
       location: 'merchant',
@@ -862,7 +862,7 @@ export class CentralService {
       maxDmg: 9,
       dex: 6,
       cost: 15,
-      special: '',
+
     },
     phantomBane: {
       location: 'lake',
@@ -872,7 +872,7 @@ export class CentralService {
       maxDmg: 8,
       dex: 7,
       cost: 0,
-      special: '',
+
     },
     bastardSword: {
       location: 'city',
@@ -958,7 +958,7 @@ export class CentralService {
       maxDmg: 5,
       dex: 7,
       cost: 0,
-      special: '',
+
     },
     fist: {
       type: 'secondary',

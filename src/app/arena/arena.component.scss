@@ -110,24 +110,32 @@
     font-weight: bold;
   }
 }
-.enemy-damage-output{
+.enemy-dmg-output-start{
   position: absolute;
   color:white;
-    top: 250px;
-    left: 60%;
+    top: 270px;
+    left: 67%;
     z-index: 2;
-    font-size: 50px;
-    // transition: all .7s linear;
-    // transform: translate(0px, -20px);
+    font-size: 40px;
+    transition: all 1.49s linear;
 }
-.player-damage-output{
+.enemy-dmg-output-end{
+  @extend .enemy-dmg-output-start;
+  transform: translate(0px,-50px);
+
+}
+.player-dmg-output-start{
   position: absolute;
   color: white;
-    top: 230px;
-    left: 20%;
-    font-size: 18px;
+    top: 300px;
+    left: 28%;
+    font-size: 40px;
     z-index: 1000;
-    // transition: all .7s linear;
-    // transform: translate(0px, -20px);
+    transition: all 1.49s linear;
+
+}
+.player-dmg-output-end{
+  @extend .player-dmg-output-start;
+  transform: translate(0px,-50px);
 }
 

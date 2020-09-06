@@ -97,11 +97,15 @@
       {{out}}
 
   </div>
-  <div *ngIf="enemyDmgOutput" class="enemy-damage-output">
-    {{this.enemyDmg}}
+  <div class="{{enemyDmgOutputMove}}">
+    <div  *ngIf="enemyDmgOutput">
+      {{this.enemyDmg}}
+    </div>
   </div>
-  <div *ngIf="playerDmgOutput" class="player-damage-output">
-    {{this.playerDmg}}
+  <div class="{{playerDmgOutputMove}}">
+    <div *ngIf="playerDmgOutput" >
+      {{this.playerDmg}}
+    </div>
   </div>
 </div>
 
