@@ -25,6 +25,8 @@ export class ArenaComponent implements OnInit {
   playerDmgOutput: boolean=false;
   playerDmgOutputMove: string = 'player-dmg-output-start'
   enemyDmgOutputMove: string = 'enemy-dmg-output-start'
+  enemyPoisonCounter: any = false;
+  enemyStunned: boolean =false;
 
 
   playerWeapon = new Subject<any>();
@@ -73,8 +75,8 @@ export class ArenaComponent implements OnInit {
         console.log('dex: ', this.player.dex);
       },
     });
-    this.playerWeapon.next(this.central.mainWeapon.soultrapKatana);
-    this.inventory.push(this.central.mainWeapon.soultrapKatana);
+    this.playerWeapon.next(this.central.mainWeapon.coralKukri);
+    this.inventory.push(this.central.mainWeapon.coralKukri);
 
     this.playerSecondary.subscribe({
       next: (item) => {
@@ -124,6 +126,8 @@ export class ArenaComponent implements OnInit {
       this.central.enemyImage = false;
     }, 1000);
     this.wait = true;
+    this.enemyPoisonCounter = false;
+    this.enemyStunned = false;
   }
   flee(){
     let range = this.thisEnemy.maxFlee - this.thisEnemy.minFlee;
@@ -142,7 +146,6 @@ export class ArenaComponent implements OnInit {
 
   }
   playerDoesDamage(){
-
     setTimeout(()=>{
       this.enemyDmgOutput = true;
       this.enemyDmgOutputMove = 'enemy-dmg-output-end'
@@ -188,21 +191,67 @@ export class ArenaComponent implements OnInit {
         this.player.hp += 1;
         this.playerDmg = `+1`;
         if (this.player.hp > this.player.maxHp){
-          this.player.hp > this.player.maxHp;
+          this.player.hp = this.player.maxHp;
         }
         setTimeout(()=>{
           this.playerDmgOutput = true;
           this.playerDmgOutputMove = 'player-dmg-output-end';
-        }, 500);
+        }, 700);
         setTimeout(()=>{
           this.playerDmgOutput = false;
           this.playerDmgOutputMove = 'player-dmg-output-start';
         }, 1500);
       }
-      // else if(this.player.stun)
-      //     this.pStun();
-      // else if(this.player.poison)
-      //     this.pPoison();
+      else if(special == 'stun'){
+        this.stunEnemy();
+      }
+      else if(special == 'poison'){
+        this.poisonEnemy();
+      }
+  }
+  poisonEnemy(){
+    if(!this.enemyPoisonCounter){
+      let poisonChance = Math.floor(Math.random() * (4) + 1);
+      console.log('1/4 poison roll, poison on 1: ', poisonChance)
+      if(poisonChance == 1){
+        this.enemyDmg += ' POISONED';
+        this.enemyPoisonCounter = 3;
+      }
+    }
+  }
+  enemyPoisoned(){
+    this.enemyPoisonCounter -= 1;
+    this.enemyHp -= 2;
+    this.enemyDmg = `poisoned -2`;
+    this.enemyDmgOutput = true;
+    this.enemyDmgOutputMove = 'enemy-dmg-output-end'
+    this.central.updateOutput(`${this.thisEnemy.name} was hit for 2 poison`);
+    setTimeout(()=>{
+      this.enemyDmgOutput = false;
+      this.enemyDmgOutputMove = 'enemy-dmg-output-start'
+    }, 1500);
+    if (this.enemyHp < 1){
+      this.enemyKilled(true);
+    }else if ( this.enemyPoisonCounter < 1){
+      this.enemyPoisonCounter = false;
+    }
+  }
+  stunEnemy(){
+    let stunChance = Math.floor(Math.random() * (5) + 1);
+    console.log('1/5 stun roll, stun on 1: ', stunChance)
+    if(stunChance == 1){
+      this.enemyStunned = true;
+      this.enemyDmg += ' STUNNED';
+      this.central.updateOutput(`${this.thisEnemy.name} stunned for 1 turn`);
+      setTimeout(()=>{
+        this.enemyDmgOutput = true;
+        this.enemyDmgOutputMove = 'enemy-dmg-output-end'
+      }, 500);
+      setTimeout(()=>{
+        this.enemyDmgOutput = false;
+        this.enemyDmgOutputMove = 'enemy-dmg-output-start'
+      }, 1500);
+    }
   }
   attack() {
     this.attackAnimation();
@@ -223,7 +272,6 @@ export class ArenaComponent implements OnInit {
       if(this.playerItem.mainWeapon.special){
        this.playerWeaponSpecial();
       }
-
       if (this.enemyHp <= 0) {
         this.central.updateOutput(`${this.thisEnemy.name} was slain`);
         this.enemyKilled(true);
@@ -241,6 +289,14 @@ export class ArenaComponent implements OnInit {
     }
   }
   enemyAttack() {
+    if(this.enemyStunned){
+      this.wait = false;
+      this.enemyStunned = false;
+      return;
+    }
+    if (this.enemyPoisonCounter){
+      this.enemyPoisoned();
+    }
     this.central.enemyAttackMove = 'enemyStrike';
     setTimeout(()=>{
       this.central.enemyAttackMove = 'enemyRest';
@@ -370,7 +426,7 @@ export class ArenaComponent implements OnInit {
       }
       this.removeItem(item);
       if (this.enemyHp <= 0) {
-        this.central.updateOutput(`${this.thisEnemy.name} was slain`);
+        this.central.updateOutput(`${this.thisEnemy.name} was blown to pieces!`);
         this.enemyKilled(true);
       }
     }
