@@ -1,14 +1,18 @@
 <div class="stage">
-  <h1><b>{{location?.name}}</b></h1>
+  <h1 *ngIf="!central.enemyImage" ><b>{{location?.name}}</b></h1>
   <img class="protagonist" src="assets/{{central.playerImage}}.gif" *ngIf="central.enemyImage">
-  <img class="playerSlash" src="assets/playerSlash.gif" *ngIf="this.central.playerSlash" >
-  <img class="enemySlash" src="assets/enemySlash.gif" *ngIf="this.central.enemySlash" >
-  <img class="background" src="assets/{{central.location.img}}" >
-  <img class="{{central.enemyAttackMove}}" src="assets/{{central.enemyImage}}.gif" *ngIf="central.enemyImage" >
+  <img class="playerSlash" src="assets/playerSlash.gif" *ngIf="this.central.playerSlash">
+  <img class="enemySlash" src="assets/enemySlash.gif" *ngIf="this.central.enemySlash">
+  <img class="background" src="assets/{{central.location.img}}">
+  <img class="{{central.enemyAttackMove}}" src="assets/{{central.enemyImage}}.gif" *ngIf="central.enemyImage">
   <div *ngIf="!central.enemyImage">
-    <button *ngIf="location?.nextAreas?.north" mat-raised-button class="north" (click)="goNorth()">NORTH to {{location.nextAreas.north}}</button>
-    <button *ngIf="location?.nextAreas?.south" mat-raised-button class="south" (click)="goSouth()" >SOUTH to {{location.nextAreas.south}}</button>
-    <button *ngIf="location?.nextAreas?.east" mat-raised-button class="east"(click)="goEast()">EAST to {{location.nextAreas.east}}</button>
-    <button *ngIf="location?.nextAreas?.west" mat-raised-button class="west" (click)="goWest()">WEST to {{location.nextAreas.west}}</button>
+    <button *ngIf="location?.nextAreas?.north" mat-raised-button class="north" (click)="goNorth()">NORTH to
+      {{location.nextAreas.north}}</button>
+    <button *ngIf="location?.nextAreas?.south" mat-raised-button class="south" (click)="goSouth()">SOUTH to
+      {{location.nextAreas.south}}</button>
+    <button *ngIf="location?.nextAreas?.east" mat-raised-button class="east" (click)="goEast()">EAST to
+      {{location.nextAreas.east}}</button>
+    <button *ngIf="location?.nextAreas?.west" mat-raised-button class="west" (click)="goWest()">WEST to
+      {{location.nextAreas.west}}</button>
   </div>
 </div>

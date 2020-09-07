@@ -9,7 +9,7 @@ export class CentralService {
   enemyImage: any;
 
 
-  constructor() {}
+  constructor() { }
 
   merchantButtonDisabled: boolean = true;
   playerSlash: boolean = false;
@@ -33,24 +33,24 @@ export class CentralService {
   getEnemy(newArea?) {
     let rand = Math.floor(Math.random() * 4);
     let enemy: any = false;
-    if(newArea){
+    if (newArea) {
       let lastLocation = this.location;
       this.location = newArea
-      if(newArea.enemies){
+      if (newArea.enemies) {
         enemy = newArea.enemies[rand];
-      }else if(lastLocation.enemies){
+      } else if (lastLocation.enemies) {
         enemy = lastLocation.enemies[rand]
-      }else{
+      } else {
         return;
       }
-    }else{
+    } else {
       enemy = this.location.enemies[rand];
     }
     this.enemyFound.emit(enemy);
     this.updateOutput(`${enemy.name} appears`);
-    if (enemy.img){
+    if (enemy.img) {
       this.enemyImage = enemy.img;
-    }else{
+    } else {
       this.randomPlaceholderImage();
     }
 
@@ -1004,37 +1004,35 @@ export class CentralService {
       cost: 30,
     },
   };
-  singleUseItems: any ={
-    smallHpPotion:{
+  singleUseItems: any = {
+    smallHpPotion: {
       type: 'Item',
       name: 'Small hp potion',
       hp: 25,
       cost: 8
     },
-    largeHpPotion:{
+    largeHpPotion: {
       type: 'Item',
       name: 'Large hp potion',
       hp: 50,
       cost: 20
     },
-    powderBomb:{
+    powderBomb: {
       type: 'Item',
       name: 'Powder bomb',
       dmg: 10,
       cost: 10
     },
-    shardBomb:{
+    shardBomb: {
       type: 'Item',
       name: 'Shard bomb',
       dmg: 20,
       cost: 20
     }
   }
-   //NPCs
-   lady = {
-    weapon: this.mainWeapon.phantombane,
+  //NPCs
+  lady = {
     name: 'Lady of the Lake',
-    ability: 'watery tart',
     hp: 1,
     attackStyle: 'rendering',
     minDmg: 0,
@@ -1046,6 +1044,13 @@ export class CentralService {
     toHit: 0,
     gold: 0,
     points: 0,
+
+    //let do: if text, open encouter-dialog
+    text: 'You see a ghostly woman walk gracefully from the lake.\
+      She approaches you, holding a faintly green glowing blade \
+      in offering. You instanly feel refreshed in her gentle gaze.\
+      +50hp. Take the blade?',
+    gift: this.mainWeapon.phantomBane
   };
   randomMerchant = {
     weapon: this.mainWeapon.coralKukri,
@@ -1073,7 +1078,7 @@ export class CentralService {
       img: 'dark-forest.gif',
       name: 'forest',
       enemies: [this.bear, this.goblins, this.elf, this.goblins],
-      nextAreas:{
+      nextAreas: {
         west: 'merchantRoad',
         east: 'swampRoad'
       }
@@ -1082,7 +1087,7 @@ export class CentralService {
       img: 'road.gif',
       name: 'merchantRoad',
       enemies: [this.wolves, this.bandit, this.marauder, this.elf],
-      nextAreas:{
+      nextAreas: {
         west: 'merchant'
       }
     },
@@ -1090,7 +1095,7 @@ export class CentralService {
       img: 'swampRoad.gif',
       name: 'swampRoad',
       enemies: [this.wolves, this.wraith, this.mudMan, this.leech],
-      nextAreas:{
+      nextAreas: {
         east: 'lake',
         west: 'merchant'
       }
@@ -1099,7 +1104,7 @@ export class CentralService {
       img: 'road2.gif',
       name: 'cityRoad',
       enemies: [this.marauder, this.thrall, this.wyvren, this.bandit],
-      nextAreas:{
+      nextAreas: {
         south: 'city',
         north: 'merchant'
       }
@@ -1108,7 +1113,7 @@ export class CentralService {
       img: 'mountain.gif',
       name: 'mountainRoad',
       enemies: [this.fSprite, this.mimic, this.mTroll, this.bat],
-      nextAreas:{
+      nextAreas: {
         west: 'mountain',
         east: 'merchant'
       }
@@ -1117,7 +1122,7 @@ export class CentralService {
       img: 'valleyRoad.gif',
       name: 'valleyRoad',
       enemies: [this.fern, this.zombie, this.panther, this.malboro],
-      nextAreas:{
+      nextAreas: {
         east: 'valley',
         west: 'homestead'
       }
@@ -1126,7 +1131,7 @@ export class CentralService {
       img: 'marsh.gif',
       name: 'marshRoad',
       enemies: [this.litchling, this.crows, this.banshee, this.aElement],
-      nextAreas:{
+      nextAreas: {
         east: 'marsh',
         west: 'valley'
       }
@@ -1135,7 +1140,7 @@ export class CentralService {
       img: 'desert.gif',
       name: 'desertRoad',
       enemies: [this.scorpion, this.phantom, this.wisp, this.taranTroll],
-      nextAreas:{
+      nextAreas: {
         south: 'desert',
         north: 'homestead'
       }
@@ -1144,7 +1149,7 @@ export class CentralService {
       img: 'road3.gif',
       name: 'cliffsRoad',
       enemies: [this.ants, this.mimic, this.doppleganger, this.miniBears],
-      nextAreas:{
+      nextAreas: {
         south: 'cliffs',
         north: 'desert'
       }
@@ -1153,7 +1158,7 @@ export class CentralService {
       img: 'forest.gif',
       name: 'forestRoad',
       enemies: [this.witch, this.bat, this.mush, this.centaur],
-      nextAreas:{
+      nextAreas: {
         west: 'tomb',
         east: 'homestead'
       }
@@ -1162,7 +1167,7 @@ export class CentralService {
       img: 'plains.gif',
       name: 'plainsRoad',
       enemies: [this.chimera, this.crows, this.sandMan, this.golem],
-      nextAreas:{
+      nextAreas: {
         north: 'plains',
         south: 'homestead'
       }
@@ -1171,7 +1176,7 @@ export class CentralService {
       img: 'mountain.gif',
       name: 'volcanoRoad',
       enemies: [this.chaosEl, this.fBat, this.omegaTroll, this.chimera],
-      nextAreas:{
+      nextAreas: {
         north: 'volcano',
         south: 'plains'
       }
@@ -1180,7 +1185,7 @@ export class CentralService {
       img: 'lake.gif',
       name: 'lake',
       enemies: [this.leech, this.mudMan, this.lady, this.poo],
-      nextAreas:{
+      nextAreas: {
         west: 'swampRoad'
       }
     },
@@ -1188,7 +1193,7 @@ export class CentralService {
       img: 'cityZone.jpg',
       name: 'cityZone',
       enemies: [this.drunk, this.vandal, this.rat, this.cultist],
-      nextAreas:{
+      nextAreas: {
         west: 'city'
       }
     },
@@ -1196,7 +1201,7 @@ export class CentralService {
       img: 'mountain.gif',
       name: 'mountain',
       enemies: [this.fSprite, this.chaosDemon, this.mTroll, this.bat],
-      nextAreas:{
+      nextAreas: {
         east: 'mountainRoad'
       }
     },
@@ -1204,7 +1209,7 @@ export class CentralService {
       img: 'valleyRoad.gif',
       name: 'valley',
       enemies: [this.fern, this.randomMerchant, this.viper, this.malboro],
-      nextAreas:{
+      nextAreas: {
         east: 'marshRoad',
         west: 'valleyRoad'
       }
@@ -1213,7 +1218,7 @@ export class CentralService {
       img: 'marsh.gif',
       name: 'marsh',
       enemies: [this.litchling, this.horde, this.crows, this.aElement],
-      nextAreas:{
+      nextAreas: {
         west: 'marshRoad'
       }
     },
@@ -1221,7 +1226,7 @@ export class CentralService {
       img: 'desert.gif',
       name: 'desert',
       enemies: [this.scorpion, this.randomMerchant, this.wisp, this.taranTroll],
-      nextAreas:{
+      nextAreas: {
         south: 'cliffsRoad',
         north: 'desertRoad'
       }
@@ -1230,7 +1235,7 @@ export class CentralService {
       img: 'plains.gif',
       name: 'cliffs',
       enemies: [this.ants, this.gryphon, this.crows, this.miniBears],
-      nextAreas:{
+      nextAreas: {
         north: 'cliffsRoad'
       }
     },
@@ -1238,7 +1243,7 @@ export class CentralService {
       img: 'road.gif',
       name: 'tomb',
       enemies: [this.scarabs, this.litchKing, this.pViper, this.spectre],
-      nextAreas:{
+      nextAreas: {
         east: 'forestRoad'
       }
     },
@@ -1246,7 +1251,7 @@ export class CentralService {
       img: 'plains.gif',
       name: 'plains',
       enemies: [this.chimera, this.sandMan, this.crows, this.golem],
-      nextAreas:{
+      nextAreas: {
         south: 'plainsRoad',
         north: 'volcanoRoad'
       }
@@ -1255,32 +1260,32 @@ export class CentralService {
       img: 'volcano.gif',
       name: 'volcano',
       enemies: [this.chaosEl, this.chaos, this.omegaTroll, this.fBat],
-      nextAreas:{
+      nextAreas: {
         south: 'volcanoRoad'
       }
     },
-    merchant:{
+    merchant: {
       img: 'road.gif',
       name: 'merchant',
-      nextAreas:{
+      nextAreas: {
         east: 'swampRoad',
         west: 'mountainRoad',
         south: 'cityRoad'
       }
     },
-    city:{
+    city: {
       img: 'city.jpg',
       name: 'city',
-      nextAreas:{
+      nextAreas: {
         east: 'cityZone',
         north: 'cityRoad',
         south: 'homestead'
       }
     },
-    homestead:{
+    homestead: {
       img: 'road2.gif',
       name: 'homestead',
-      nextAreas:{
+      nextAreas: {
         east: 'valleyRoad',
         south: 'desertRoad',
         west: 'forestRoad',
@@ -1290,4 +1295,11 @@ export class CentralService {
   }
   // initialize location
   location: any = this.areas.forest;
+
+  // encounter = {
+  //   ladyOfTheLake:{
+  //     name: 'Lady Of The Lake',
+  //
+  //   }
+  // }
 }

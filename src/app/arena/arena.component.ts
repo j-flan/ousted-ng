@@ -471,6 +471,10 @@ export class ArenaComponent implements OnInit {
     });
   }
   useItemBattle(item){
+    if(!this.showBattleOptions || this.player.hp < 1){
+      this.central.updateOutput('Option not availabe outside of combat')
+      return;
+    }
     this.useItem(item);
     if (this.playerPoisonCounter){
       this.playerPoisoned();

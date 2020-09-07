@@ -20,6 +20,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
+import { EncounterDialog } from './encounter-dialog/encounter-dialog.component';
 
 
 
@@ -30,7 +31,8 @@ import {MatRadioModule} from '@angular/material/radio';
     StageComponent,
     ArenaComponent,
     MerchantDialog,
-    MenuDialog
+    MenuDialog,
+    EncounterDialog
   ],
   imports: [
     BrowserModule,
