@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
-
+import { MatDialog } from '@angular/material/dialog';
+import { EncounterDialog } from './encounter-dialog/encounter-dialog.component';
 @Injectable({
   providedIn: 'root',
 })
@@ -9,11 +10,15 @@ export class CentralService {
   enemyImage: any;
 
 
-  constructor() { }
+  constructor(
+    protected dialog: MatDialog
+  ) { }
 
   merchantButtonDisabled: boolean = true;
   playerSlash: boolean = false;
   enemySlash: boolean = false;
+  enemy: any = false;
+
 
   enemyAttackMove: string = 'enemyRest';
 
@@ -32,29 +37,46 @@ export class CentralService {
 
   getEnemy(newArea?) {
     let rand = Math.floor(Math.random() * 4);
-    let enemy: any = false;
+     this.enemy = false;
     if (newArea) {
       let lastLocation = this.location;
       this.location = newArea
       if (newArea.enemies) {
-        enemy = newArea.enemies[rand];
+        this.enemy = newArea.enemies[rand];
       } else if (lastLocation.enemies) {
-        enemy = lastLocation.enemies[rand]
+        this.enemy = lastLocation.enemies[rand]
       } else {
         return;
       }
     } else {
-      enemy = this.location.enemies[rand];
+      this.enemy = this.location.enemies[rand];
     }
-    this.enemyFound.emit(enemy);
-    this.updateOutput(`${enemy.name} appears`);
-    if (enemy.img) {
-      this.enemyImage = enemy.img;
+    this.enemyFound.emit(this.enemy);
+    this.updateOutput(`${this.enemy.name} appears`);
+    if (this.enemy.img) {
+      this.enemyImage = this.enemy.img;
     } else {
       this.randomPlaceholderImage();
     }
+    if (this.enemy.text){
+      this.encounterModal();
+    }
 
   }
+
+  encounterModal(){
+    const dialogRef = this.dialog.open(EncounterDialog ,{
+      width: '500px',
+      maxHeight: '850px',
+      data: {
+        npc: this.enemy
+      }
+    });
+    dialogRef.afterClosed().subscribe(()=>{
+
+    });
+  }
+
 
   poison: boolean = false;
   poisonCount: number = 0;
