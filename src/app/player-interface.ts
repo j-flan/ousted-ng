@@ -10,10 +10,27 @@ export interface PlayerStats{
     maxHp: number,
 }
 
+export interface Weapon{
+  type: string,
+  name: string,
+  minDmg: number,
+  maxDmg: number,
+  dex: number,
+  cost: number,
+}
+
+export interface Armor{
+  type: string,
+  name: string,
+  defense: number,
+  evade: number,
+  cost: number,
+}
+
 export interface PlayerEquipment{
-    primary: Object,
-    secondary: Object,
-    armor: Object,
+    primary: Weapon,
+    secondary: Weapon,
+    armor: Armor,
     inventory: any[],
   }
   
@@ -36,34 +53,27 @@ export interface PlayerEquipment{
 
 export const startingEquipment = {
   primary:{
-    basicSword: {
-      type: 'primary',
-      name: 'Dull Blade',
-      minDmg: 2,
-      maxDmg: 5,
-      dex: 7,
-      cost: 0,
-  
-    },
+    type: 'primary',
+    name: 'Dull Blade',
+    minDmg: 2,
+    maxDmg: 5,
+    dex: 6,
+    cost: 0,
   },
   secondary: {
-    fist: {
-      type: 'secondary',
-      name: 'fist',
-      dex: 0,
-      minDmg: 0,
-      hp: 0,
-      cost: 0,
-    }
+    type: 'secondary',
+    name: 'fist',
+    minDmg: 0,
+    maxDmg: 1,
+    dex: 1,
+    cost: 0,
   },
   armor: {
-    clothes: {
-      type: 'armor',
-      name: 'Soiled Clothes',
-      defense: 0,
-      evade: 7,
-      cost: 0,
-    },
+    type: 'armor',
+    name: 'Soiled Clothes',
+    defense: 0,
+    evade: 7,
+    cost: 0,
   },
   inventory: []
 };

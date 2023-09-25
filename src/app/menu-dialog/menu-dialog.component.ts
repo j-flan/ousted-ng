@@ -38,9 +38,9 @@ export class MenuDialog implements OnInit {
     this.equip.hp = this.stats.hp;
     this.sortInventory();
     this.passEquippedValues(
-      _.values(this.equipment.primary)[0],
-      _.values(this.equipment.secondary)[0],
-      _.values(this.equipment.armor)[0]
+      this.equipment.primary,
+      this.equipment.secondary,
+      this.equipment.armor
     );
   }
 
