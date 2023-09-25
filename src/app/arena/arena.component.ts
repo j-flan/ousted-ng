@@ -6,13 +6,19 @@ import { MerchantDialog } from '../merchant-dialog/merchant-dialog.component';
 import { MenuDialog } from '../menu-dialog/menu-dialog.component';
 import * as _ from 'lodash';
 
+
+
 @Component({
   selector: 'app-arena',
   templateUrl: './arena.component.html',
   styleUrls: ['./arena.component.scss'],
 })
+
 export class ArenaComponent implements OnInit {
-  constructor(public central: CentralService, protected dialog: MatDialog) {}
+  constructor(
+    public central: CentralService, 
+    protected dialog: MatDialog
+  ) {}
 
   inventory: any = [];
   items: any = [];
@@ -445,31 +451,7 @@ export class ArenaComponent implements OnInit {
     });
   }
 
-  menuModal() {
-    const dialogRef = this.dialog.open(MenuDialog, {
-      width: '700px',
-      maxHeight: '850px',
-      disableClose: true,
-      data: {
-        inventory: this.inventory,
-        equipped: this.playerItem,
-        items: this.items,
-        hp: this.player.hp,
-        maxHp: this.player.maxHp,
-      },
-    });
-    dialogRef.afterClosed().subscribe((gear?) => {
-      if (gear) {
-        if (gear.weapon) this.playerWeapon.next(gear.weapon);
-        if (gear.secondary) this.playerSecondary.next(gear.secondary);
-        if (gear.armor) this.playerArmor.next(gear.armor);
-        if (gear.items) {
-          this.items = gear.items;
-          this.player.hp = gear.hp;
-        }
-      }
-    });
-  }
+  
   useItemBattle(item){
     if(!this.showBattleOptions || this.player.hp < 1){
       this.central.updateOutput('Option not availabe outside of combat')

@@ -1,13 +1,13 @@
 <div class="dialog">
   <div class="inventory">
-    <h2>Main-Hand Weapons</h2>
+    <h2>Primary</h2>
     <mat-selection-list [multiple]="false">
       <mat-list-option *ngFor="let item of weaponGroup" [value]="item" (click)="equipWeapon(item)">
         {{item.name}} &nbsp; dmg: {{item.minDmg}}-{{item.maxDmg}} &nbsp; dex: {{item.dex}} &nbsp; sp: {{item.special}}
       </mat-list-option>
     </mat-selection-list>
     <hr>
-    <h2>Off-Hand Items</h2>
+    <h2>Secondary</h2>
     <mat-selection-list [multiple]="false">
       <mat-list-option *ngFor="let item of secondaryGroup" [value]="item" (click)="equipSecondary(item)">
         {{item.name}} &nbsp; +dex: {{item.dex}} &nbsp; +min: {{item.minDmg}} &nbsp; +hp: {{item.hp}}
@@ -21,7 +21,6 @@
       </mat-list-option>
     </mat-selection-list>
     <hr>
-    <h2>Items</h2>
     <mat-accordion>
       <mat-expansion-panel class="expansion-panel"
           (opened)="panelOpenState = true"
@@ -32,7 +31,7 @@
           </mat-panel-title>
           </mat-expansion-panel-header>
           <mat-list>
-          <mat-list-item *ngFor="let item of items">
+          <mat-list-item *ngFor="let item of equipment.inventory">
               <mat-option (click)="useItem(item)">
                   {{item.name}}
               </mat-option>
@@ -46,7 +45,7 @@
     <h3><b>Main:</b> {{showEquipped?.mainWeapon?.name}}</h3>
     <h3><b>Off-hand:</b> {{showEquipped?.secondary?.name}}</h3>
     <h3><b>Armor:</b> {{showEquipped?.armor?.name}}</h3>
-    <p class="hp-output"><b>HP: {{hp}}/{{maxHp}}</b></p>
+    <p class="hp-output"><b>HP: {{stats.hp}}/{{stats.maxHp}}</b></p>
   </div>
   <button class="exit-button"
     mat-raised-button color="primary"

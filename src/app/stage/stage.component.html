@@ -1,6 +1,9 @@
 <div class="stage">
   <h1 *ngIf="!central.enemyImage" ><b>{{location?.name}}</b></h1>
-  <img class="protagonist" src="assets/{{central.playerImage}}.gif" *ngIf="central.enemyImage">
+  <div class="protagonist">
+    <img src="assets/{{central.playerImage}}.gif" *ngIf="central.enemyImage">
+    <action-menu></action-menu>
+  </div>
   <img class="playerSlash" src="assets/playerSlash.gif" *ngIf="this.central.playerSlash">
   <img class="enemySlash" src="assets/enemySlash.gif" *ngIf="this.central.enemySlash">
   <img class="background" src="assets/{{central.location.img}}">
