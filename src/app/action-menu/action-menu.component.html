@@ -1,0 +1,27 @@
+<div class="button-row">
+    <div class="menu">
+      <button
+       [disabled]="enemyHp > 0"
+        mat-raised-button
+        (click)="menuModal()">
+        Open Inventory
+  
+      </button>
+    </div>
+    <!-- <div class="merchant">
+      <button
+       [disabled]="enemyHp > 0 || central.merchantButtonDisabled"
+        mat-raised-button color="primary"
+        (click)="merchantModal()">
+        Talk to Merchant
+      </button>
+    </div>
+    <div class="get-enemy">
+      <button
+       [disabled]="enemyHp > 0 || !central.location.enemies"
+         mat-raised-button
+        (click)="getEnemy()">
+        Search Area
+      </button>
+    </div> -->
+  </div>

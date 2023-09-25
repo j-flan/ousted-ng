@@ -1,31 +1,5 @@
 
-<div class="button-row">
-  <div class="menu">
-    <button
-     [disabled]="enemyHp > 0"
-      mat-raised-button
-      (click)="menuModal()">
-      Open Inventory
 
-    </button>
-  </div>
-  <div class="merchant">
-    <button
-     [disabled]="enemyHp > 0 || central.merchantButtonDisabled"
-      mat-raised-button color="primary"
-      (click)="merchantModal()">
-      Talk to Merchant
-    </button>
-  </div>
-  <div class="get-enemy">
-    <button
-     [disabled]="enemyHp > 0 || !central.location.enemies"
-       mat-raised-button
-      (click)="central.getEnemy()">
-      Search Area
-    </button>
-  </div>
-</div>
 
 <div class="status-row">
   <div class="attack">
@@ -34,35 +8,7 @@
     [disabled]="!showBattleOptions || player.hp < 1"
     (click)="attack()">
       Attack
-
     </button>
-  <div>
-    <button class="item"
-     mat-raised-button
-    [disabled]="!showBattleOptions || player.hp < 1">
-      <mat-form-field >
-          Item
-        <mat-select class="select">
-          <mat-option class="option"
-            *ngFor="let item of items"
-            [value]="item"
-            (click)="useItemBattle(item)"
-          >
-            {{item.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </button>
-  </div>
-  <div >
-    <button
-    class="flee"
-    mat-raised-button
-    [disabled]="!showBattleOptions || player.hp < 1"
-    (click)="flee()"
-    >Flee
-  </button>
-  </div>
 </div>
   <div class="player-stats">
     <div class="player-data">

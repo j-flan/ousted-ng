@@ -1,13 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as _ from 'lodash';
+import { PlayerEquipment, PlayerStats } from '../player-interface';
 
 export interface MenuDialogData {
-  inventory: any;
-  equipped: any;
-  items: any;
-  hp: any;
-  maxHp: any;
+  equipment: PlayerEquipment,
+  stats: PlayerStats
 }
 
 @Component({
@@ -20,50 +18,48 @@ export class MenuDialog implements OnInit {
     public dialogRef: MatDialogRef<MenuDialog>,
     @Inject(MAT_DIALOG_DATA) public data: MenuDialogData
   ) {
-    this.inventory = this.data.inventory;
-    this.equipped = this.data.equipped;
-    this.items = this.data.items;
-    this.hp = this.data.hp;
-    this.maxHp = this.data.maxHp;
+    console.log('have data:,  ', this.data);
+    this.equipment = data.equipment;
+    this.stats = data.stats;
   }
+
+  equipment: PlayerEquipment;
+  stats: PlayerStats
+
   showEquipped: any = {};
-  equipped: any;
-  inventory: any;
   weaponGroup: any = [];
   secondaryGroup: any = [];
   armorGroup: any = [];
   itemGroup: any = [];
   equip: any = {};
-  items: any;
-  hp: any;
-  maxHp: any;
   panelOpenState: boolean = false;
 
   ngOnInit(): void {
-    this.equip.hp = this.hp;
-    console.log('Have equipped items', this.equipped);
+    this.equip.hp = this.stats.hp;
     this.sortInventory();
     this.passEquippedValues(
-      this.equipped.mainWeapon,
-      this.equipped.secondary,
-      this.equipped.armor
-
+      _.values(this.equipment.primary)[0],
+      _.values(this.equipment.secondary)[0],
+      _.values(this.equipment.armor)[0]
     );
-    console.log('Have equipped items', this.showEquipped);
   }
 
   passEquippedValues(weapon, off, armor) {
+    this.weaponGroup.push(weapon);
+    this.secondaryGroup.push(off);
+    this.armorGroup.push(armor);
+    console.log('have equipped: ', weapon, off, armor)
     this.showEquipped.mainWeapon = weapon;
     this.showEquipped.secondary = off;
     this.showEquipped.armor = armor;
   }
 
   sortInventory() {
-    _.forEach(this.inventory, (item) => {
-      if (item.type === 'main') {
-        this.weaponGroup.push(item);
+    _.forEach(this.equipment.inventory, (item) => {
+      if (item.type === 'primary') {
+        
       } else if (item.type === 'secondary') {
-        this.secondaryGroup.push(item);
+        
       } else {
         this.armorGroup.push(item);
       }
@@ -77,7 +73,7 @@ export class MenuDialog implements OnInit {
   equipSecondary(item) {
     this.equip.secondary = item;
     if(item.hp){
-      this.maxHp += item.hp;
+      this.stats.maxHp += item.hp;
     }
     this.showEquipped.secondary = item;
     console.log('Secondary changed: ', item);
@@ -89,11 +85,11 @@ export class MenuDialog implements OnInit {
   }
   useItem(item){
     if (_.includes(item.name, 'potion')){
-      this.hp += item.hp;
-      if (this.hp > this.maxHp){
-        this.hp = this.maxHp;
+      this.stats.hp += item.hp;
+      if (this.stats.hp > this.stats.maxHp){
+        this.stats.hp = this.stats.maxHp;
       }
-      this.equip.hp = this.hp;
+      this.equip.hp = this.stats.hp;
       this.removeItem(item);
     }
   }
@@ -104,11 +100,11 @@ export class MenuDialog implements OnInit {
       console.log('Cant use item now');
   }
   findUsedPotion(item){
-    let remove = _.findIndex(this.items, index=>{
+    let remove = _.findIndex(this.equipment.inventory, index=>{
       return item === index
     });
-    this.items.splice(remove, 1);
-    this.equip.items = this.items;
+    this.equipment.inventory.splice(remove, 1);
+    this.equip.items = this.equipment.inventory;
   }
 }
 

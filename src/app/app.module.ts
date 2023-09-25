@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AppOutputComponent } from './app-output/app-output.component';
 import { StageComponent } from './stage/stage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button'
@@ -21,18 +20,19 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import { EncounterDialog } from './encounter-dialog/encounter-dialog.component';
+import { ActionMenuComponent } from './action-menu/action-menu.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppOutputComponent,
     StageComponent,
     ArenaComponent,
     MerchantDialog,
     MenuDialog,
-    EncounterDialog
+    EncounterDialog,
+    ActionMenuComponent
   ],
   imports: [
     BrowserModule,
